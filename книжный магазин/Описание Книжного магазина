@@ -1,0 +1,56 @@
+User
+{
+	1. id(login):string
+	2. email
+	3. addess
+	4. FIO
+	5. password:string
+	6. books_for_sell:db -> x
+	7. current_orders:db -> x
+	8. current_bids:db -> x
+	9. current_orders:db -> x
+	10. Money
+}
+	book_for_sell
+	{
+    	1. id(author, name, year_of_redaction):string//если, что забыл можно добавть в любой момент миграцией
+		2. current_price:decimal
+		3. blitz_price:decimal
+		4. Array_of_Images
+		5. sellType:string- //sell_now, auction, auction_whith_blitz_price
+		6. owner:db -> 1 //User
+		7. bids_group:db -> x
+		8. finish_time
+	}
+		bids_group
+		{
+			1. book_target:db -> 1
+			2. bids:db -> x
+			3. hist_bid_id:string
+		}
+			bid
+			{
+				1. book_target:db -> 1
+				2. min_bid
+				3. max_bid
+				4. step
+			}
+		Order
+		{
+		   1.	OrderType:string-
+		   2.	buyers_id //user
+		   3.	seller_id //user
+		   4.	checker_id//admin
+		   5.	price:decimal
+		   6.	deliveryType:string-
+		   7.	check:bool
+		}
+Admin
+{
+	1. id(login):string
+	2. FIO
+	3. email
+	4. address
+	5. access-(1-4)
+}
+
