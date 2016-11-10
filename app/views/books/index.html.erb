@@ -14,7 +14,6 @@
       <th>Date of realize</th>
       <th>Binding</th>
       <th>Genre</th>
-      <th>Book for sell</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -22,19 +21,18 @@
   <tbody>
     <% @books.each do |book| %>
       <tr>
-        <td><%= book.title %></td>
-        <td><%= book.author %></td>
-        <td><%= book.price %></td>
-        <td><%= book.page_count %></td>
-        <td><%= book.about %></td>
-        <td><%= book.owner %></td>
-        <td><%= book.date_of_realize %></td>
-        <td><%= book.binding %></td>
-        <td><%= book.genre %></td>
-        <td><%= book.book_for_sell %></td>
-        <td><%= link_to 'Show', book %></td>
-        <td><%= link_to 'Edit', edit_book_path(book) %></td>
-        <td><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td class="col-md-1"><%= book.title %></td>
+        <td class="col-md-1"><%= book.author %></td>
+        <td class="col-md-1"><%= book.price %></td>
+        <td class="col-md-1"><%= book.page_count %></td>
+        <td class="col-md-1"><%= book.about %></td>
+        <td class="col-md-1"><%= book.owner %></td>
+        <td class="col-md-1"><%= book.date_of_realize %></td>
+        <td class="col-md-1"><%= book.binding %></td>
+        <td class="col-md-1"><%= book.genre %></td>
+        <td class="col-md-1"><%= link_to 'Show', book %></td>
+        <td class="col-md-1"><%= link_to 'Edit', edit_book_path(book) %></td>
+        <td class="col-md-1"><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
