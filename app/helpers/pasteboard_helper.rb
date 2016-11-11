@@ -1,0 +1,2 @@
+module PasteboardHelper
+end
