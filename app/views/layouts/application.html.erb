@@ -25,9 +25,9 @@
           </div>
           <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li><%= link_to "Home Page", controller: 'books', action: "index"  %></li>
-              <li><a href="#about" ><os-p >About</os-p></a></li>
-              <li><a href="#contact"><os-p>Contact</os-p></a></li>
+              <li><%= link_to "Home Page", controller: 'pasteboard', action: "home"  %></li>
+              <li><%= link_to "About", controller: 'pasteboard', action: "about"  %></li>
+              <li><%= link_to "Contact", controller: 'pasteboard', action: "contact"  %></li>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" ><os-p>Log in<span class="caret"></span></os-p></a>
                 <ul class="dropdown-menu" role="menu">
