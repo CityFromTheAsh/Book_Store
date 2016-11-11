@@ -19,8 +19,13 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" ><os-p>Log in<span class="caret"></span></os-p></a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="#"><os-p>log in</os-p></a></li>
-                <li><a href="#"><os-p>log out</os-p></a></li>
+                <% if (current_user).nil? %>
+                  <li><%= link_to "Log in", controller: 'devise/sessions', action: 'new'  %></li>
+                <% else %>
+                    <%= current_user.email %>
+                    <%= link_to 'me', user_path(current_user) %>
+                <% end %>
+                <li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
                 <li><a href="#"><os-p>Registration</os-p></a></li>
                 <li class="divider"></li>
                 <li class="dropdown-header"><os-p>Balance: </os-p></li>
