@@ -51,5 +51,10 @@
   <%= @book.book_for_sell %>
 </p>
 
-<%= link_to 'Edit', edit_book_path(@book) %> |
+<% if @user==true %>
+  <%= link_to 'buy it', new_order_path(@book)%>
+    <%if current_user.admin==true%>
+      <%= link_to 'Edit', edit_book_path(@book) %>
+    <% end %>
+<% end %>|
 <%= link_to 'Back', books_path %>
