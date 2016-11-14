@@ -22,15 +22,14 @@
                 <% if (current_user).nil? %>
                   <li><%= link_to "Log in", controller: 'devise/sessions', action: 'new'  %></li>
                 <% else %>
-                    <%= current_user.email %>
-                    <%= link_to 'me', user_path(current_user) %>
+                    <%= link_to current_user.login, user_path(current_user), class: "dropdown-header"  %>
                 <% end %>
                 <li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
                 <li><a href="#"><os-p>Registration</os-p></a></li>
                 <li class="divider"></li>
-                <li class="dropdown-header"><os-p>Balance: </os-p></li>
-                <li><a href="#"><os-p>My messages:</os-p></a></li>
-                <li><a href="#"><os-p>New message</os-p></a></li>
+                <li class="dropdown-header">Balance: </li>
+                <li><a href="#">My messages:</a></li>
+                <li><a href="#">New message</a></li>
               </ul>
             </li>
           </ul>
