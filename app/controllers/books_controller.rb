@@ -5,11 +5,10 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index
-    var admin
     if current_user==nil
-    admin = false
+    @admin = false
     else
-    admin = current_user.admin
+    @admin = current_user.admin
     end
     @books = Book.all
   end
