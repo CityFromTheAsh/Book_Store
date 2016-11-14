@@ -27,7 +27,7 @@
                 <li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
                 <li><a href="#"><os-p>Registration</os-p></a></li>
                 <li class="divider"></li>
-                <li class="dropdown-header">Balance: </li>
+                <li class="dropdown-header">Balance:<%=current_user.balance%> </li>
                 <li><a href="#">My messages:</a></li>
                 <li><a href="#">New message</a></li>
               </ul>
