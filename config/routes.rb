@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  get 'user/index'
+
+  get 'user/buyed'
+
+  get 'user/sold'
+
+  get 'user/reviews'
+
   resources :accounts
   resources :orders
   root 'pasteboard#home'
