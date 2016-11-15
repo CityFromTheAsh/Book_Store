@@ -5,6 +5,8 @@ body
 }
 .bind{
   position: fixed;
+  font-weight:bold;
+  z-index: 1;
 }
 .top{
   top: 0%;
@@ -20,4 +22,7 @@ li:focus{
 }
 .half_to_left{
   left: 50%;
+}
+.l_margin{
+  margin-left: 1%;
 }

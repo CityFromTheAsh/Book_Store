@@ -1,4 +1,5 @@
 <%= render 'layouts/top_panel' %>
+<div class="l_margin">
 <h1>Home Page</h1>
 <!-- Carousel
 ================================================== -->
@@ -16,7 +17,7 @@
         <div class="carousel-caption">
           <h1 data-replace-tmp-key="1d3e47a74e344ff8e33fe8b91bdfbd78"><os-p key="1d3e47a74e344ff8e33fe8b91bdfbd78">Example headline.</os-p></h1>
           <p data-replace-tmp-key="fe61dd0778f411f7ba020e18acadd094"><os-p key="fe61dd0778f411f7ba020e18acadd094">Note: If you're viewing this page via a <code>file://</code> URL, the "next" and "previous" Glyphicon buttons on the left and right might not load/display properly due to web browser security rules.</os-p></p>
-          <p><a class="btn btn-lg btn-primary" href="#" role="button" data-replace-tmp-key="9533c6aebf15f50ca47c762c3dc9f0ce"><os-p key="9533c6aebf15f50ca47c762c3dc9f0ce">Sign up today</os-p></a></p>
+          <%= link_to "Books", controller: 'books', action: 'index', class:"btn btn-lg btn-primary"%>
         </div>
       </div>
     </div>
@@ -44,7 +45,6 @@
   <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
   <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
 </div><!-- /.carousel -->
-<%= link_to "Books", controller: 'books', action: 'index'  %>
 <!-- START THE FEATURETTES -->
 
 <hr class="featurette-divider">
@@ -86,3 +86,4 @@
 <hr class="featurette-divider">
 
 <!-- /END THE FEATURETTES -->
+</div>
