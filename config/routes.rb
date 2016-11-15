@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
-  get 'user/index'
+  get 'users/index'
 
-  get 'user/buyed'
+  get 'users/buyed'
 
-  get 'user/sold'
+  get 'users/sold'
 
-  get 'user/reviews'
+  get 'users/reviews'
+  get 'users/current_lots'
 
   resources :accounts
   resources :orders
