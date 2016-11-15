@@ -13,9 +13,8 @@ class OrdersController < ApplicationController
   end
 
   # GET /orders/new
-  def new(book)
+  def new()
     @order = Order.new()
-    @order.book  = book
   end
 
   # GET /orders/1/edit
