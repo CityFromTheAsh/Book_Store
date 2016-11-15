@@ -52,9 +52,9 @@
 </p>
 
 <% if @user==true %>
-  <%= link_to 'buy it', new_order_path(@book)%>
+  <%= link_to 'buy it', controller: 'orders', action: 'new', book: @book%> |
     <%if current_user.admin==true%>
       <%= link_to 'Edit', edit_book_path(@book) %>
-    <% end %>
-<% end %>|
+    <% end %>|
+<% end %>
 <%= link_to 'Back', books_path %>

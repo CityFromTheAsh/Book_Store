@@ -13,8 +13,9 @@ class OrdersController < ApplicationController
   end
 
   # GET /orders/new
-  def new
-    @order = Order.new
+  def new(book)
+    @order = Order.new()
+    @order.book  = book
   end
 
   # GET /orders/1/edit
@@ -69,6 +70,6 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:product, :price, :seller, :buyer, :admin)
+      params.require(:order).permit(:title, :price, :seller, :buyer, :admin)
     end
 end
