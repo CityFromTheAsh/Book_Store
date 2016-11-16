@@ -5,18 +5,19 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index
-    if current_user==nil
-    @admin = false
+    if current_user.nil?
+      @admin = false
     else
-    @admin = current_user.admin
+      @admin = current_user.admin
     end
     @books = Book.all
+    @books = @books.where(user_id: params[:user_id]) if params[:user_id].present?
   end
 
   # GET /books/1
   # GET /books/1.json
   def show
-    if current_user!=nil
+    if current_user.present?
       @user=true
     else
       @user=false
@@ -75,13 +76,13 @@ class BooksController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_book
-      @book = Book.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_book
+    @book = Book.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def book_params
-      params.require(:book).permit(:title, :author, :price, :page_count, :about, :owner, :date_of_realize, :binding, :genre, :book_for_sell)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def book_params
+    params.require(:book).permit(:title, :author, :price, :page_count, :about, :owner, :date_of_realize, :binding, :genre, :book_for_sell)
+  end
 end
