@@ -1,13 +1,13 @@
 Rails.application.routes.draw do
-  get 'users/index'
-
-  get 'users/buyed'
-
-  get 'users/sold'
-
-  get 'users/reviews'
-  get 'users/current_lots'
-
+  resources :users, only: [:index] do
+    collection do
+      get :buyed
+      get :sold
+      get :reviews
+      get :current_lots
+      get :show
+    end
+  end
   resources :accounts
   resources :orders
   root 'pasteboard#home'
