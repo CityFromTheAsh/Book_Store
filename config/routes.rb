@@ -19,7 +19,9 @@ Rails.application.routes.draw do
   get 'pasteboard/contact'
 
   resources :books
-  devise_for :users
+  devise_for :users,  controllers: {
+      registrations: 'user_devise_controller/registrations'
+  }
   resources :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
