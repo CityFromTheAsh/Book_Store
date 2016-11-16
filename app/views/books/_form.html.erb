@@ -41,7 +41,7 @@
 
       <div class="field">
         <%= f.label :binding %>
-        <%= f.text_field :binding, class: "form-control"  %>
+        <%= f.select :binding, binding:[:hardcover, :softcover] %>
       </div>
 
       <div class="field">

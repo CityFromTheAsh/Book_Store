@@ -36,7 +36,9 @@ class BooksController < ApplicationController
   # POST /books.json
   def create
     @book = Book.new(book_params)
-
+    @book.user=current_user
+    @book.owner=current_user.login
+    @book.date_of_realize = Time.new
     respond_to do |format|
       if @book.save
         format.html { redirect_to @book, notice: 'Book was successfully created.' }
