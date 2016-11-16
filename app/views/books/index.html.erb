@@ -27,7 +27,7 @@
         <td class="col-md-1"><%= book.price %></td>
         <td class="col-md-1"><%= book.page_count %></td>
         <td class="col-md-1"><%= book.about %></td>
-        <td class="col-md-1"><%= book.owner %></td>
+        <td class="col-md-1"><%= link_to book.owner, book.user %></td>
         <td class="col-md-1"><%= book.date_of_realize %></td>
         <td class="col-md-1"><%= book.binding %></td>
         <td class="col-md-1"><%= book.genre %></td>
