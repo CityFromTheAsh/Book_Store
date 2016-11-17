@@ -19,6 +19,7 @@ gem 'coffee-rails', '~> 4.2'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'devise'
 gem 'enumerize'
+gem 'carrierwave', '>= 1.0.0.rc', '< 2.0'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

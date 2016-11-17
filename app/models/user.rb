@@ -8,8 +8,5 @@ class User < ApplicationRecord
   has_many :books
   has_many :orders
 
-  def admin?
-    return true if current_user.present? && current_user.admin
-    false
-  end
+
 end
