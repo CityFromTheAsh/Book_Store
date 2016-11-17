@@ -13,8 +13,12 @@ Rails.application.routes.draw do
       #get :books
     end
   end
-  resources :orders
+
   resources :books
+  resources :books do
+    resources :orders
+  end
+  resources :orders
   devise_for :users,  controllers: {
       registrations: 'user_devise_controller/registrations'
   }

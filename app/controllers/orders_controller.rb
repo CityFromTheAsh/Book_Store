@@ -1,5 +1,7 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
+  before_action :check_book, except: [:index]
+  before_action :authenticate_user!, all:
 
   # GET /orders
   # GET /orders.json
@@ -13,8 +15,20 @@ class OrdersController < ApplicationController
   end
 
   # GET /orders/new
-  def new()
-    @order = Order.new()
+  def new
+    @order = Order.new
+    #todo check bought book
+    @book = Book.find(params[:book_id])
+    @order.book_id = @book
+    @order.title = @book.title
+    @order.price = @book.price
+    @order.user = current_user
+    @book.book_for_sell = false
+    @order.buyer = current_user.login
+    @order.seller = @book.owner
+    @order.admin = "admin"
+    @order.save
+    @book.save
   end
 
   # GET /orders/1/edit
@@ -71,4 +85,7 @@ class OrdersController < ApplicationController
     def order_params
       params.require(:order).permit(:title, :price, :seller, :buyer, :admin)
     end
+  def check_book
+    redirect_to books_path if params[:book_id].nil?
+  end
 end
