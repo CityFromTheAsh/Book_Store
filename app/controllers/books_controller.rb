@@ -5,11 +5,6 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index
-    if current_user.nil?
-      @admin = false
-    else
-      @admin = current_user.admin
-    end
     @books = Book.all
     @books = @books.where(user_id: params[:user_id]) if params[:user_id].present?
   end
