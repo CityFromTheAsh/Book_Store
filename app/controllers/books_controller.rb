@@ -12,11 +12,6 @@ class BooksController < ApplicationController
   # GET /books/1
   # GET /books/1.json
   def show
-    if current_user.present?
-      @user=true
-    else
-      @user=false
-    end
   end
 
   # GET /books/new
