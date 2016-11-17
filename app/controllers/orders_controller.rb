@@ -19,7 +19,7 @@ class OrdersController < ApplicationController
     @order = Order.new
     #todo check bought book
     @book = Book.find(params[:book_id])
-    @order.book_id = @book
+    @order.book_id = @book.id
     @order.title = @book.title
     @order.price = @book.price
     @order.user = current_user
