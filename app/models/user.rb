@@ -7,6 +7,6 @@ class User < ApplicationRecord
   validates :login, presence: true, uniqueness: true
   has_many :books
   has_many :orders
-
+  mount_uploader :avatar, AvatarUploader
 
 end
