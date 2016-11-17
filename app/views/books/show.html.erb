@@ -53,7 +53,7 @@
 
 <% if current_user.present? %>
   <%= link_to 'buy it', controller: 'orders', action: 'new', book: @book%> |
-    <%if current_user.admin==true%>
+    <%if current_user.admin %>
       <%= link_to 'Edit', edit_book_path(@book) %>
     <% end %>|
 <% end %>
