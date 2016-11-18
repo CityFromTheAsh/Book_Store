@@ -8,5 +8,6 @@ class User < ApplicationRecord
   has_many :books
   has_many :orders
   mount_uploader :avatar, AvatarUploader
-
+  paginates_per 5
+  max_paginates_per 5
 end
