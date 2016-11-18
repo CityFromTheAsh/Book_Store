@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :user_books]
+  before_action :set_user, only: [:show]
 
   def index
   end
@@ -11,9 +11,6 @@ class UsersController < ApplicationController
   end
 
   def reviews
-  end
-
-  def user_books
   end
 
   def current_lots
