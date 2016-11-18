@@ -1,0 +1,10 @@
+<h2>Edit <%=@user.login %></h2>
+<%= form_for @user do |f| %>
+    <div class="field">
+      <%= f.label :avatar %><br />
+      <%= f.file_field :avatar  %>
+    </div>
+    <div class="actions">
+      <%= f.submit "Sign up" %>
+    </div>
+<%end%>
