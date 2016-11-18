@@ -1,12 +1,20 @@
 <%= render 'layouts/top_panel' %></<br xmlns="http://www.w3.org/1999/html">
 
 <strong>Login :</strong>
-<%= @user.login %></br>
+<%= @user.login %>
+<% if current_user === @user%>
+    <%= link_to 'Edit', edit_user_registration_path%>
+<% end %>
+
+</br>
 <div class="row">
   <div class="col-md-3">
 
-
-    <%= image_tag @user.avatar.url, size:'180x200'  %>
+    <% if @user.avatar.url.present? %>
+      <%= image_tag @user.avatar.url, size:'180x200'  %>
+    <%else%>
+        <%= image_tag 'no-image-available.jpg', size:'180x200'  %>
+    <%end%>
 
     <p id="notice"><%= notice %></p>
   </div>
