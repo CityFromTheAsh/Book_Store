@@ -24,6 +24,13 @@
       <%= @user.balance  %>
         </br>
     <% end %>
+    <strong>Books sold: </strong>
+    <%= @user.books_sold  %></br>
+    <strong>Books bought: </strong>
+    <%= @user.books_bought  %></br>
+    <strong>Seller reputation: </strong>
+    <%= @user.reputation  %></br>
+
     <%= link_to "show all products for sale", user_books_path(@user) %>
   </div>
 </div>

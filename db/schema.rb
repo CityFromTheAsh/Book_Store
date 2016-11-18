@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161117113549) do
+ActiveRecord::Schema.define(version: 20161118111420) do
 
   create_table "books", force: :cascade do |t|
     t.string   "title"
@@ -61,6 +61,9 @@ ActiveRecord::Schema.define(version: 20161117113549) do
     t.string   "login",                  default: "",    null: false
     t.integer  "books_id"
     t.string   "avatar"
+    t.integer  "books_sold",             default: 0
+    t.integer  "books_bought",           default: 0
+    t.float    "reputation",             default: 0.0
     t.index ["books_id"], name: "index_users_on_books_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
