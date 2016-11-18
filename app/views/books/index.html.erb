@@ -1,6 +1,7 @@
 <%= render 'layouts/top_panel' %>
 <p id="notice"><%= notice %></p>
 
+<nav>
 <h1>Books</h1>
 
 
@@ -44,5 +45,8 @@
 </table>
 
 <br>
+  </nav>
+ <%= paginate @books %>
+
 
 <%= link_to 'New Book', new_book_path %>
