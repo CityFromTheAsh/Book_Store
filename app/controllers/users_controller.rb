@@ -1,7 +1,10 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show]
+  require 'carrierwave/orm/activerecord'
 
   def index
+    @users = User.all
+    @users = @users.page(params[:page])
   end
 
   def show
