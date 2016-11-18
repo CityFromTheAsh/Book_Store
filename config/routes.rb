@@ -26,7 +26,9 @@ Rails.application.routes.draw do
   resources :users
   resources :users do
     resources :books
-    # get :user_books
+    devise_for :users,  controllers: {
+        registrations: 'user_devise_controller/registrations'
+    }
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
