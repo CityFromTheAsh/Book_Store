@@ -1,10 +1,16 @@
-<%= render 'layouts/top_panel' %></<br>
+<%= render 'layouts/top_panel' %></<br xmlns="http://www.w3.org/1999/html">
 
 <strong>Login :</strong>
-<%= @user.login %>
+<%= @user.login %></br>
+<div class="row">
+  <div class="col-md-3">
 
 
+    <%= image_tag @user.avatar.url, size:'180x200'  %>
 
-<p id="notice"><%= notice %></p>
-
-<%= link_to "show all products for sale", user_books_path(@user) %>
+    <p id="notice"><%= notice %></p>
+  </div>
+  <div class="col-md-3">
+    <%= link_to "show all products for sale", user_books_path(@user) %>
+  </div>
+</div>
