@@ -3,8 +3,9 @@ Rails.application.routes.draw do
   get 'pasteboard/about'
   get 'pasteboard/contact'
   resource :pasteboard
-  resources :users, only: [:index] do
+  resources :users do
     collection do
+      get :index
       get :buyed
       get :sold
       get :reviews
