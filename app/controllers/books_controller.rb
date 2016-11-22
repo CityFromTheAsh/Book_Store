@@ -14,11 +14,13 @@ class BooksController < ApplicationController
   # GET /books/1
   # GET /books/1.json
   def show
+    @image = @book.images.all
   end
 
   # GET /books/new
   def new
     @book = Book.new
+    @image = @book.images.build
   end
 
   # GET /books/1/edit
@@ -34,6 +36,13 @@ class BooksController < ApplicationController
     @book.date_of_realize = Time.new
     respond_to do |format|
       if @book.save
+        params[:images]['image'].each do |a|
+          @image = @book.images.create!(
+              title: @book.title,
+              owner: @book.owner,
+              image: a
+          )
+        end
         format.html { redirect_to @book, notice: 'Book was successfully created.' }
         format.json { render :show, status: :created, location: @book }
       else
@@ -75,6 +84,6 @@ class BooksController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def book_params
-    params.require(:book).permit(:title, :author, :price, :page_count, :about, :owner, :date_of_realize, :binding, :genre, :book_for_sell)
+    params.require(:book).permit(:title, :author, :price, :page_count, :about, :owner, :date_of_realize, :binding, :genre, :book_for_sell, images_attributes: [:id, :books_id, :image])
   end
 end
