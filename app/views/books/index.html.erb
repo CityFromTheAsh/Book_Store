@@ -9,15 +9,15 @@
 <table class="table table-condensed table-bordered">
   <thead>
     <tr class="success">
-      <th>Title</th>
-      <th>Author</th>
-      <th>Price</th>
-      <th>Page count</th>
-      <th>About</th>
-      <th>Owner</th>
-      <th>Date of realize</th>
-      <th>Binding</th>
-      <th>Genre</th>
+      <th><%=link_to 'Title', books_path(sort:'title') %></th>
+      <th><%=link_to 'Author', books_path(sort:'author') %></th>
+      <th><%=link_to 'Price', books_path(sort:'price') %></th>
+      <th><%=link_to 'Page count', books_path(sort:'page count') %></th>
+      <th><%=link_to 'About', books_path(sort:'about') %></th>
+      <th><%=link_to 'Owner', books_path(sort:'owner') %></th>
+      <th><%=link_to 'Date of realize', books_path(sort:'date of realize') %></th>
+      <th><%=link_to 'Binding', books_path(sort:'binding') %></th>
+      <th><%=link_to 'Genre', books_path(sort:'genre') %></th>
       <th colspan="3"></th>
     </tr>
   </thead>

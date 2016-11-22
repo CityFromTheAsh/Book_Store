@@ -7,6 +7,7 @@ class BooksController < ApplicationController
   # GET /books.json
   def index
     @books = Book.all
+    @books = @books.order(params[:sort])
     @books = @books.where(user_id: params[:user_id]) if params[:user_id].present?
     @books = @books.page(params[:page])
     @image = Array.new
