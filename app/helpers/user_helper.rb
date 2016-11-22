@@ -7,4 +7,8 @@ module UserHelper
     return true if admin?(current_user) || (current_user.present? && current_user.login==book.owner)
     false
   end
+  def change(user)
+    user.ban = !user.ban
+    user.save
+  end
 end

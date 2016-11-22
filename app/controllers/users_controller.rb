@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit]
-  require 'carrierwave/orm/activerecord'
+  before_action :set_user, only: [:show, :edit, :ban]
 
   def index
     @users = User.all
@@ -17,6 +16,15 @@ class UsersController < ApplicationController
   end
 
   def reviews
+  end
+
+  def ban
+    @user.update(ban: false)
+    respond_to do |format|
+      format.html { redirect_to :back }
+      format.js { render json: {}, status: :ok }
+    end
+
   end
 
   private

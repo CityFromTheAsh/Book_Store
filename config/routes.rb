@@ -20,6 +20,9 @@ Rails.application.routes.draw do
       get :current_lots
       get :show
     end
+    member do
+      put :ban
+    end
   end
 
   resources :users do
