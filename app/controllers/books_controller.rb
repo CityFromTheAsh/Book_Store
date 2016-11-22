@@ -9,23 +9,21 @@ class BooksController < ApplicationController
     @books = Book.all
     @books = @books.where(user_id: params[:user_id]) if params[:user_id].present?
     @books = @books.page(params[:page])
-    i=0
     @image = Array.new
     for book in @books
       @image << book.images.first
     end
-
   end
 
   # GET /books/1
   # GET /books/1.json
   def show
+    @image = @book.images.all
   end
 
   # GET /books/new
   def new
     @book = Book.new
-    @image = @book.images.build
   end
 
   # GET /books/1/edit
@@ -85,7 +83,6 @@ class BooksController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_book
     @book = Book.find(params[:id])
-    @image = @book.images.all
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
