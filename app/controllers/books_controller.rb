@@ -7,12 +7,13 @@ class BooksController < ApplicationController
   # GET /books.json
   def index
     @books = Book.all
-    @books = @books.order(params[:sort])
     @books = @books.where(user_id: params[:user_id]) if params[:user_id].present?
+    @books = @books.where(author: params[:book_author]) if params[:book_author].present?
+    @books = @books.order(params[:sort])
     @books = @books.page(params[:page])
     @image = Array.new
-    for book in @books
-      @image << book.images.first
+      for book in @books do
+        @image << book.images.first
     end
   end
 
