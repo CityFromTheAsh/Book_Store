@@ -7,13 +7,14 @@ class BooksController < ApplicationController
   # GET /books.json
   def index
     @books = Book.all
+    @books = @books.where(book_for_sell: true)
     @books = @books.where(user_id: params[:user_id]) if params[:user_id].present?
-    @books = @books.where(author: params[:book_author]) if params[:book_author].present?
+    @books = @books.where(author: params[:book_id]) if params[:book_id].present?
     @books = @books.order(params[:sort])
     @books = @books.page(params[:page])
     @image = Array.new
-      for book in @books do
-        @image << book.images.first
+    for book in @books do
+      @image << book.images.first
     end
   end
 
@@ -30,6 +31,10 @@ class BooksController < ApplicationController
 
   # GET /books/1/edit
   def edit
+  end
+
+  def find
+    @books = @user.where(author: params[:book_author]) if params[:book_author].present?
   end
 
   # POST /books

@@ -19,7 +19,7 @@ class UsersController < ApplicationController
   end
 
   def ban
-    @user.update(ban: false)
+    @user.update(ban: !@user.ban)
     respond_to do |format|
       format.html { redirect_to :back }
       format.js { render json: {}, status: :ok }
