@@ -10,6 +10,18 @@ class UsersController < ApplicationController
   end
 
   def show
+    @status = {
+        sale: 'for sale',
+        payment: 'waiting for payment',
+        delivery: 'awaiting delivery',
+        control: 'awaiting control of the reliability and completion of the transaction'
+    }
+    @counts = {
+        for_sale: count(@status[:sale]),
+        waiting_for_payment: count(@status[:waiting_for_payment]),
+        awaiting_delivery: count(@status[:delivery]),
+        awaiting_control: count(@status[:control])
+    }
   end
 
   def sold
@@ -30,5 +42,9 @@ class UsersController < ApplicationController
   private
   def set_user
     @user = User.find(params[:id])
+  end
+
+  def count(status)
+    @user.books.where(status: status).length
   end
 end
