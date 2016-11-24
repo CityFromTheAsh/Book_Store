@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161124123220) do
+ActiveRecord::Schema.define(version: 20161124123833) do
 
   create_table "books", force: :cascade do |t|
     t.string   "title"
@@ -45,9 +45,10 @@ ActiveRecord::Schema.define(version: 20161124123220) do
 
   create_table "messages", force: :cascade do |t|
     t.string   "message"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.integer  "user_id"
+    t.boolean  "hide",       default: false, null: false
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
