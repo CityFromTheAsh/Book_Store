@@ -30,6 +30,16 @@
     <%= @user.books_bought  %></br>
     <strong>Seller reputation: </strong>
     <%= @user.reputation  %></br>
+    <strong>Amount of books for sale: </strong>
+    <%= link_to count(@user.books, "for sale"), user_books_path(@user, status:"for sale")  %></br>
+    <strong>Amount of books waiting for payment: </strong>
+    <%= link_to count(@user.books, "waiting for payment"), user_books_path(@user, status:"waiting for payment")  %></br>
+    <strong>Amount of books awaiting delivery: </strong>
+    <%= link_to count(@user.books, "awaiting delivery"), user_books_path(@user, status:"awaiting delivery")  %></br>
+    <strong>Amount of books awaiting control of the reliability and completion of the transaction: </strong>
+    <%= link_to count(@user.books, "awaiting control of the reliability and completion of the transaction"),
+         user_books_path(@user, status:"awaiting control of the reliability and completion of the transaction")  %></br>
+
 
     <%= link_to "show all products for sale", user_books_path(@user) %>
   </div>

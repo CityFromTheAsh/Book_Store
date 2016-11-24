@@ -11,4 +11,7 @@ module UserHelper
     user.ban = !user.ban
     user.save
   end
+  def count(books, status)
+    return books.where(status: status).length
+  end
 end
