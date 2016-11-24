@@ -1,4 +1,18 @@
 Rails.application.routes.draw do
+  get 'message/new'
+
+  get 'message/create'
+
+  get 'message/show'
+
+  get 'message/edit'
+
+  get 'message/index'
+
+  get 'message/update'
+
+  get 'message/delete'
+
   #3 стартовых ссылки
   #-----------------------------------
   root 'pasteboard#home'
@@ -39,7 +53,9 @@ Rails.application.routes.draw do
   resources :books
   resources :books do
     resources :orders
-  end
+
+    end
+  resources :messages
   #------------------------------------
 
   #orders------------------------------

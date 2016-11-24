@@ -42,6 +42,7 @@ class BooksController < ApplicationController
   # GET /books/1
   # GET /books/1.json
   def show
+    @message = Message.new
     @image = @book.images.all
   end
 
