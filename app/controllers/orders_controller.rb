@@ -16,19 +16,17 @@ class OrdersController < ApplicationController
 
   # GET /orders/new
   def new
-    @order = Order.new
-    #todo check bought book
     @book = Book.find(params[:book_id])
-    @order.book_id = @book.id
-    @order.title = @book.title
-    @order.price = @book.price
-    @order.user = current_user
-    @book.book_for_sell = false
-    @order.buyer = current_user.login
-    @order.seller = @book.owner
-    @order.admin = "admin"
+    @book.order = Order.new if @book.order.nil?
+    @order = @book.order
+    @order =
+        {
+          book: @book,
+          user: current_user,
+          seller: @book.owner,
+          admin: "admin"
+        }
     @order.save
-    @book.save
   end
 
   # GET /orders/1/edit
@@ -39,10 +37,11 @@ class OrdersController < ApplicationController
   # POST /orders.json
   def create
     @order = Order.new(order_params)
-
     respond_to do |format|
       if @order.save
         format.html { redirect_to @order, notice: 'Order was successfully created.' }
+        @order.book.status = "waiting for payment"
+        @order.book.save
         format.json { render :show, status: :created, location: @order }
       else
         format.html { render :new }
