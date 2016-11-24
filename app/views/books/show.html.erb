@@ -64,4 +64,9 @@
 </br>
 <strong>Add</strong>
 </br>
-<%= text_area_tag :comment %>
+<%= form_for @messages do |f|%>
+<%= f.text_area :message %>
+<div class="actions">
+  <%= f.submit class: "btn btn-default dropdown-toggle" %>
+</div>
+<% end %>
