@@ -10,4 +10,5 @@ class User < ApplicationRecord
   mount_uploader :avatar, AvatarUploader
   paginates_per 5
   max_paginates_per 5
+  has_many :messages
 end
