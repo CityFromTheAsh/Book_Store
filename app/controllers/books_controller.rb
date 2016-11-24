@@ -6,16 +6,34 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index
-    @books = Book.all
-    @books = @books.where(book_for_sell: true)
-    @books = @books.where(user_id: params[:user_id]) if params[:user_id].present?
-    @books = @books.where(author: params[:book_id]) if params[:book_id].present?
-    @books = @books.order(params[:sort])
-    @books = @books.page(params[:page])
-    @image = Array.new
-    for book in @books do
-      @image << book.images.first
-    end
+
+
+     if params[:search].present?
+
+       search_strings = params[:search].gsub(/[^\w\sА-Яа-я ]/, '')
+       fields = Book.columns.select { |c| c.type == :string }.map { |c| c.name }
+       where_sql = fields.map { |field| "#{field} LIKE '%#{search_strings}%'" }.join(' OR ')
+       @books = Book.where(where_sql)
+
+     else
+
+      @books = Book.all
+      @books = @books.where(book_for_sell: true)
+      @books = @books.where(user_id: params[:user_id]) if params[:user_id].present?
+      @books = @books.where(author: params[:book_id]) if params[:book_id].present?
+      @books = @books.order(params[:sort])
+
+     end
+
+     @books = @books.page(params[:page])
+     @image = Array.new
+     if @books.present?
+
+      for book in @books do
+        @image << book.images.first
+      end
+
+     end
   end
 
   # GET /books/1
