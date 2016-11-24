@@ -19,7 +19,7 @@ class OrdersController < ApplicationController
     @book = Book.find(params[:book_id])
     @book.order = Order.new if @book.order.nil?
     @order = @book.order
-    @order =
+    @order
         {
           book: @book,
           user: current_user,
