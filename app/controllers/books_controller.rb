@@ -17,6 +17,7 @@ class BooksController < ApplicationController
 
      else
 
+       #todo status should'nt be param
       @books = Book.all
       status = params[:status]
       status ||= 'for sale'
