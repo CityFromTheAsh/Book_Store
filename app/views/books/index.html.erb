@@ -36,19 +36,20 @@
       <% @books.each do |book| %>
         <tr>
           <td class="col-md-1 active"><%= book.title %></td>
-          <td class="col-md-1"><%= book.author %></td>
+          <td><%= book.author %></td>
           <td class="col-md-1"><%= book.price %></td>
           <td class="col-md-1"><%= book.page_count %></td>
           <td class="col-md-1"><%= book.about %></td>
-          <td class="col-md-1 info"><%= link_to book.owner, book.user %></td>
+          <td class="col-md-1"><%= link_to book.owner, book.user %></td>
           <td class="col-md-1"><%= book.date_of_realize %></td>
           <td class="col-md-1"><%= book.binding %></td>
           <td class="col-md-1"><%= book.genre %></td>
-          <td class="col-md-1 warning"><%= link_to 'Show', book %></td>
+          <td class="col-md-1 warning"><%= link_to 'Show', book %>
           <% if admin? current_user %>
-              <td class="col-md-1"><%= link_to 'Edit', edit_book_path(book) %></td>
-              <td class="col-md-1 danger"><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              <%= link_to 'Edit', edit_book_path(book) %>
+              <%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %>
           <% end %>
+          </td>
           <td><%= image_tag book.images.first.image.url, size: '150x100'  if book.images.first.present?   %></td>
         </tr>
       <% end %>
