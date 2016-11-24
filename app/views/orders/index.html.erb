@@ -5,8 +5,6 @@
 <table>
   <thead>
     <tr>
-      <th>Product</th>
-      <th>Price</th>
       <th>Seller</th>
       <th>Buyer</th>
       <th>Admin</th>
@@ -17,8 +15,6 @@
   <tbody>
     <% @orders.each do |order| %>
       <tr>
-        <td><%= order.title %></td>
-        <td><%= order.price %></td>
         <td><%= order.seller %></td>
         <td><%= order.buyer %></td>
         <td><%= order.admin %></td>

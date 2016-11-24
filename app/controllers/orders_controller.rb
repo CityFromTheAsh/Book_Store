@@ -17,16 +17,20 @@ class OrdersController < ApplicationController
   # GET /orders/new
   def new
     @book = Book.find(params[:book_id])
-    @book.order = Order.new if @book.order.nil?
-    @order = @book.order
-    @order
-        {
-          book: @book,
-          user: current_user,
-          seller: @book.owner,
-          admin: "admin"
-        }
-    @order.save
+
+    if @book.order.nil?
+
+      @book.order = Order.new(book: @book, buyer: current_user.login,  admin: "new admin")
+
+    else
+
+      @book.order.buyer=current_user.login
+      @book.order.admin="else admin"
+
+    end
+
+    @book.order.save
+    @order=@book.order
   end
 
   # GET /orders/1/edit
@@ -37,11 +41,12 @@ class OrdersController < ApplicationController
   # POST /orders.json
   def create
     @order = Order.new(order_params)
+    @order.book.status = "waiting for payment"
+    @order.book.save
     respond_to do |format|
       if @order.save
         format.html { redirect_to @order, notice: 'Order was successfully created.' }
-        @order.book.status = "waiting for payment"
-        @order.book.save
+
         format.json { render :show, status: :created, location: @order }
       else
         format.html { render :new }
@@ -82,7 +87,7 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:title, :price, :seller, :buyer, :admin)
+      params.require(:order).permit(:book, :price, :seller, :buyer, :admin)
     end
   def check_book
     redirect_to books_path if params[:book_id].nil?
