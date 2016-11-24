@@ -18,7 +18,7 @@ class BooksController < ApplicationController
      else
 
       @books = Book.all
-      @books = @books.where(book_for_sell: true)
+      @books = @books.where(staus: 'for sale')
       @books = @books.where(user_id: params[:user_id]) if params[:user_id].present?
       @books = @books.where(author: params[:book_id]) if params[:book_id].present?
       @books = @books.order(params[:sort])
