@@ -1,0 +1,16 @@
+<%= render 'layouts/top_panel' %>
+<p id="notice"><%= notice %></p>
+<% if @message.book.present? %>
+  <strong>Author: </strong>
+  <%= @message.book.user.login %>
+  </br>
+  <strong>Date: </strong>
+    <%= @message.created_at %>
+  </br>
+  </br>
+  <strong>message: </strong>
+  <%= @message.message %>
+    <% if current_user.present? && (current_user == @message.book.user)%>
+        <%=link_to 'Edit' %>
+    <% end %>
+<%end%>
