@@ -1,5 +1,5 @@
 <%= render 'layouts/top_panel' %>
-<p id="notice"><%= notice %></p>
+<p id="notice" xmlns="http://www.w3.org/1999/html"><%= notice %></p>
 
 <p>
   <strong>Title:</strong>
@@ -55,19 +55,49 @@
 </p>
 
 <% if current_user.present? %>
-  <%= link_to 'buy it', new_book_order_path(@book)%> |
+    <%= link_to 'buy it', new_book_order_path(@book)%> |
     <%if current_user.admin %>
-      <%= link_to 'Edit', edit_book_path(@book) %>
+        <%= link_to 'Edit', edit_book_path(@book) %>
     <% end %>|
 <% end %>
 <%= link_to 'Back', books_path %>
+
+<% @book.messages.each do |message| %>
+    <div class="message-field success">
+      <div class="col-md-6">
+        <%= image_tag message.book.user.avatar, size: '50x50' %>
+        </div>
+      <div class="col-md-1">
+        <div class="message-author">
+          <strong>Author: </strong>
+          <%= message.book.user.login %>
+          </br>
+        </div>
+        <div class="message-time">
+          <strong>created_at: </strong>
+          <%= message.created_at %>
+          </br>
+        </div>
+        </br>
+        <div class="message-text">
+          <strong>Message: </strong>
+          <%= message.message %>
+        </div>
+      </div>
+    </div>
+    </br>
+    </br>
+<% end %>
+
+<% if current_user.present? %>
 </br></br></br>
 <strong>Add comment</strong>
 </br>
-
-<%= form_for @message do |f|%>
-  <%= f.text_area :message %>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <%= form_for @message do |f|%>
+        <%= f.hidden_field(:book_id, value: @book.id)   %>
+        <%= f.text_area :message %>
+        <div class="actions">
+          <%= f.submit  %>
+        </div>
+    <% end%>
 <% end %>

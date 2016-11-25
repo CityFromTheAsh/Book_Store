@@ -6,10 +6,10 @@ class MessagesController < ApplicationController
 
   def create
     @message = Message.new(message_params)
+
     respond_to do |format|
       if @message.save
-        format.html { redirect_to @message, notice: 'Order was successfully created.' }
-
+        format.html { redirect_to @message, notice: 'Message was successfully created.' }
         format.json { render :show, status: :created, location: @message }
       else
         format.html { render :new }
@@ -25,7 +25,7 @@ class MessagesController < ApplicationController
   end
 
   def index
-    #@messages = Message.all
+    @messages = Message.all
   end
 
   def update
@@ -37,7 +37,7 @@ class MessagesController < ApplicationController
   private
 
   def message_params
-    params.require(:message).permit(:message)
+    params.require(:message).permit(:message, :book_id, :users)
   end
   def set_message
     @message = Message.find(params[:id])

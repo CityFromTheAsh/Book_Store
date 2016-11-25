@@ -10,4 +10,5 @@ class Book < ApplicationRecord
   validates :title, presence: true
   validates :price, presence: true
   validates  :author, presence: true
+  has_many :messages
 end

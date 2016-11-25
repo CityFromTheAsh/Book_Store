@@ -42,7 +42,9 @@ class BooksController < ApplicationController
   # GET /books/1
   # GET /books/1.json
   def show
-    @message = Message.new
+    if current_user.present?
+      @message = Message.new
+    end
     @image = @book.images.all
   end
 
