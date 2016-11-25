@@ -96,6 +96,7 @@
     <%= form_for @message do |f|%>
         <%= f.hidden_field(:book_id, value: @book.id)   %>
         <%= f.text_area :message %>
+        <%= f.hidden_field(:sender_id, value: current_user.id) %>
         <div class="actions">
           <%= f.submit  %>
         </div>
