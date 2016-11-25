@@ -13,4 +13,6 @@
     <% if current_user.present? && (current_user == @message.book.user)%>
         <%=link_to 'Edit' %>
     <% end %>
+    </br>
+  <%=link_to 'back', messages_path %>
 <%end%>

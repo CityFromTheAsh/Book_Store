@@ -3,6 +3,7 @@ class MessagesController < ApplicationController
   before_action :authenticate_user!, only: [:index]
 
   def new
+    @message = Message.new
   end
 
   def create
@@ -26,8 +27,10 @@ class MessagesController < ApplicationController
   end
 
   def index
-    @messages = Message.where(sender: current_user).or(recipient: current_user)
-  end
+    @message = Message.where(sender: current_user)
+    @message << Message.where(recipient: current_user) if Message.where(recipient: current_user).present?
+    @message = @message.page(params[:page])
+    end
 
   def update
   end
