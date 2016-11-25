@@ -1,0 +1,24 @@
+<%= render 'layouts/top_panel' %></<br>
+<h1>Messages: </h1>
+<table class="table table-condensed table-bordered">
+  <thead>
+  <tr class="success">
+    <th>Sender</th>
+    <th>Recipient</th>
+    <th>Created at</th>
+    <th>Edited at</th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @messages.each do |message| %>
+  <tr>
+    <td class="col-md-1 active"> <%= message.sender %> </td>
+    <td class="col-md-1 active"> <%= message.recipient %> </td>
+    <td class="col-md-1 info"> <%= message.created_at %> </td>
+    <td class="col-md-1 info"> <%= message.edited_at %> </td>
+  </tr>
+  <% end %>
+
+  </tbody>
+</table>

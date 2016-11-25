@@ -26,7 +26,7 @@ class MessagesController < ApplicationController
   end
 
   def index
-    @messages = Message.where(sender: current_user).or(sender: recipient)
+    @messages = Message.where(sender: current_user).or(recipient: current_user)
   end
 
   def update
