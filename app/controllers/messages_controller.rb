@@ -8,7 +8,7 @@ class MessagesController < ApplicationController
 
   def create
     @message = Message.new(message_params)
-
+    @message.sender = current_user
     respond_to do |format|
       if @message.save
         format.html { redirect_to @message, notice: 'Message was successfully created.' }
@@ -27,8 +27,7 @@ class MessagesController < ApplicationController
   end
 
   def index
-    @message = Message.where(sender: current_user)
-    @message << Message.where(recipient: current_user) if Message.where(recipient: current_user).present?
+    @message = Message.where(sender: current_user).or(Message.where(recipient: current_user))
     @message = @message.page(params[:page])
     end
 
@@ -41,7 +40,7 @@ class MessagesController < ApplicationController
   private
 
   def message_params
-    params.require(:message).permit(:message, :book_id, :sender_id)
+    params.require(:message).permit(:message, :book_id, :sender_id, :recipient_id)
   end
   def set_message
     @message = Message.find(params[:id])

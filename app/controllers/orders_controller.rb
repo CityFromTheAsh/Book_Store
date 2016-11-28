@@ -17,20 +17,14 @@ class OrdersController < ApplicationController
   # GET /orders/new
   def new
     @book = Book.find(params[:book_id])
-
     if @book.order.nil?
-
       @book.order = Order.new(book: @book, buyer: current_user.login,  admin: "new admin")
-
     else
-
-      @book.order.buyer=current_user.login
-      @book.order.admin="else admin"
-
+      @book.order.buyer = current_user.login
+      @book.order.admin = "else admin"
     end
-
     @book.order.save
-    @order=@book.order
+    @order = @book.order
   end
 
   # GET /orders/1/edit

@@ -40,6 +40,7 @@ Rails.application.routes.draw do
   end
 
   resources :users do
+    resource :messages
     resources :books
     devise_for :users,  controllers: {
         registrations: 'user_devise_controller/registrations'
