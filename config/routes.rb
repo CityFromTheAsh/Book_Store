@@ -1,30 +1,13 @@
 Rails.application.routes.draw do
-  get 'message/new'
+  resource :message
 
-  get 'message/create'
-
-  get 'message/show'
-
-  get 'message/edit'
-
-  get 'message/index'
-
-  get 'message/update'
-
-  get 'message/delete'
-
-  #3 стартовых ссылки
-  #-----------------------------------
   root 'pasteboard#home'
   get 'pasteboard/about'
   get 'pasteboard/contact'
-  #-----------------------------------
 
-
-  #users------------------------------
-   devise_for :users,  controllers: {
-    registrations: 'user_devise_controller/registrations'
-    }
+  devise_for :users,  controllers: {
+      registrations: 'user_devise_controller/registrations'
+  }
   resources :users do
     collection do
       get :index
@@ -47,22 +30,15 @@ Rails.application.routes.draw do
     }
   end
 
-
-  #------------------------------------
-
-  #books-------------------------------
   resources :books
   resources :books do
     resources :orders
 
-    end
+  end
   resources :messages
-  #------------------------------------
 
-  #orders------------------------------
   resources :orders
 
-  #------------------------------------
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

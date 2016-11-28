@@ -1,14 +1,16 @@
 class Book < ApplicationRecord
+  extend Enumerize
+
+  has_many :images
+  has_many :messages
   belongs_to :user
   has_one :order
-  extend Enumerize
+  accepts_nested_attributes_for :images
+
   enumerize :binding, in: {hardcover: true, softcover: false}
+
   paginates_per 5
   max_paginates_per 5
-  has_many :images
-  accepts_nested_attributes_for :images
-  validates :title, presence: true
-  validates :price, presence: true
-  validates  :author, presence: true
-  has_many :messages
+
+  validates :title, :price, :author, presence: true
 end
