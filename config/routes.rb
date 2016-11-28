@@ -11,10 +11,8 @@ Rails.application.routes.draw do
   resources :users do
     collection do
       get :index
-      get :buyed
       get :sold
       get :reviews
-      get :current_lots
       get :show
     end
     member do
