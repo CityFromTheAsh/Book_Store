@@ -12,7 +12,8 @@ class BooksController < ApplicationController
       @books = Book.where(where_sql)
     else
       #TODO: status should'nt be param
-      @books = Book.where(status: (params[:status] || 'for sale'))
+      #@books = Book.where(status: (params[:status] || Book.status.find_value(:for_sale)))
+      @books= Book.all
       @books = @books.where(user_id: params[:user_id]) if params[:user_id].present?
       @books = @books.where(author: params[:book_id]) if params[:book_id].present?
       @books = @books.order(params[:sort])

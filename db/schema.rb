@@ -38,8 +38,8 @@ ActiveRecord::Schema.define(version: 20161129120749) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "book_id"
-    t.string   "owner"
     t.string   "title"
+    t.string   "owner"
     t.index ["book_id"], name: "index_images_on_book_id"
   end
 
