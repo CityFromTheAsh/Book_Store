@@ -21,7 +21,6 @@ class OrdersController < ApplicationController
       @book.order = Order.new(book: @book, buyer: current_user.login,  admin: "new admin")
     else
       @book.order.buyer = current_user.login
-      @book.order.admin = "else admin"
     end
     @book.order.save
     @order = @book.order
@@ -35,12 +34,10 @@ class OrdersController < ApplicationController
   # POST /orders.json
   def create
     @order = Order.new(order_params)
-    @order.book.status = "waiting for payment"
-    @order.book.save
+    @order.book.update(status: "waiting for payment")
     respond_to do |format|
       if @order.save
         format.html { redirect_to @order, notice: 'Order was successfully created.' }
-
         format.json { render :show, status: :created, location: @order }
       else
         format.html { render :new }
@@ -74,15 +71,16 @@ class OrdersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_order
-      @order = Order.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_order
+    @order = Order.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def order_params
-      params.require(:order).permit(:book, :price, :seller, :buyer, :admin)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def order_params
+    params.require(:order).permit(:book, :price, :seller, :buyer, :admin)
+  end
+
   def check_book
     redirect_to books_path if params[:book_id].nil?
   end

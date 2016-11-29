@@ -8,6 +8,7 @@ class Book < ApplicationRecord
   accepts_nested_attributes_for :images
 
   enumerize :binding, in: {hardcover: true, softcover: false}
+  enumerize :status, in: %w(for_sale waiting_payment waiting_delivery waiting_control)
 
   paginates_per 5
   max_paginates_per 5

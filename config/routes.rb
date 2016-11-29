@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  resource :message
-
   root 'pasteboard#home'
   get 'pasteboard/about'
   get 'pasteboard/contact'
@@ -8,7 +6,11 @@ Rails.application.routes.draw do
   devise_for :users,  controllers: {
       registrations: 'user_devise_controller/registrations'
   }
+
+  resources :messages
   resources :users do
+    resources :books
+    resource :messages
     collection do
       get :index
       get :sold
@@ -19,24 +21,8 @@ Rails.application.routes.draw do
       put :ban
     end
   end
-
-  resources :users do
-    resource :messages
-    resources :books
-    devise_for :users,  controllers: {
-        registrations: 'user_devise_controller/registrations'
-    }
-  end
-
-  resources :books
   resources :books do
     resources :orders
-
   end
-  resources :messages
-
   resources :orders
-
-
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

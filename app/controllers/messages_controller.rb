@@ -1,5 +1,5 @@
 class MessagesController < ApplicationController
-  before_action :set_message, only:[:show, :update, :delete]
+  before_action :set_message, only: [:show, :update, :delete]
   before_action :authenticate_user!, only: [:index]
 
   def new
@@ -27,9 +27,8 @@ class MessagesController < ApplicationController
   end
 
   def index
-    @message = Message.where(sender: current_user).or(Message.where(recipient: current_user))
-    @message = @message.page(params[:page])
-    end
+    @message = Message.where(sender: current_user).or(Message.where(recipient: current_user)).page(params[:page])
+  end
 
   def update
   end
@@ -42,6 +41,7 @@ class MessagesController < ApplicationController
   def message_params
     params.require(:message).permit(:message, :book_id, :sender_id, :recipient_id)
   end
+
   def set_message
     @message = Message.find(params[:id])
   end

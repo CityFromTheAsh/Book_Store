@@ -2,25 +2,18 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :ban]
 
   def index
-    @users = User.all
-    @users = @users.page(params[:page])
+    @users = User.all.page(params[:page])
   end
 
   def edit
   end
 
   def show
-    @status = {
-        sale: 'for sale',
-        payment: 'waiting for payment',
-        delivery: 'awaiting delivery',
-        control: 'awaiting control of the reliability and completion of the transaction'
-    }
     @counts = {
-        for_sale: count(@status[:sale]),
-        waiting_for_payment: count(@status[:waiting_for_payment]),
-        awaiting_delivery: count(@status[:delivery]),
-        awaiting_control: count(@status[:control])
+        for_sale: count('for_sale'),
+        # waiting_for_payment: count(@status[:waiting_for_payment]),
+        # awaiting_delivery: count(@status[:delivery]),
+        # awaiting_control: count(@status[:control])
     }
   end
 

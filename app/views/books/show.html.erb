@@ -5,7 +5,7 @@
   <strong>Title:</strong>
   <%= @book.title %>
 </p>
-<% @image.each do |p| %>
+<% @book.images.each do |p| %>
     <%= image_tag p.image.url, size: '150x100' %>
 <% end %>
 

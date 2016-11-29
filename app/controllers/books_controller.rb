@@ -1,51 +1,29 @@
 class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:show, :index]
-  require 'carrierwave/orm/activerecord'
 
   # GET /books
   # GET /books.json
   def index
-
-
-     if params[:search].present?
-
-       search_strings = params[:search].gsub(/[^\w\sА-Яа-я ]/, '')
-       fields = Book.columns.select { |c| c.type == :string }.map { |c| c.name }
-       where_sql = fields.map { |field| "#{field} LIKE '%#{search_strings}%'" }.join(' OR ')
-       @books = Book.where(where_sql)
-
-     else
-
-       #todo status should'nt be param
-      @books = Book.all
-      status = params[:status]
-      status ||= 'for sale'
-      @books = @books.where(status: status)
+    if params[:search].present?
+      search_strings = params[:search].gsub(/[^\w\sА-Яа-я ]/, '')
+      fields = Book.columns.select { |c| c.type == :string }.map { |c| c.name }
+      where_sql = fields.map { |field| "#{field} LIKE '%#{search_strings}%'" }.join(' OR ')
+      @books = Book.where(where_sql)
+    else
+      #TODO: status should'nt be param
+      @books = Book.where(status: (params[:status] || 'for sale'))
       @books = @books.where(user_id: params[:user_id]) if params[:user_id].present?
       @books = @books.where(author: params[:book_id]) if params[:book_id].present?
       @books = @books.order(params[:sort])
-
-     end
-
-     @books = @books.page(params[:page])
-     @image = Array.new
-     if @books.present?
-
-      for book in @books do
-        @image << book.images.first
-      end
-
-     end
+    end
+    @books = @books.page(params[:page])
   end
 
   # GET /books/1
   # GET /books/1.json
   def show
-    if current_user.present?
-      @message = Message.new
-    end
-    @image = @book.images.all
+    @message = Message.new if current_user.present?
   end
 
   # GET /books/new
@@ -65,16 +43,14 @@ class BooksController < ApplicationController
   # POST /books.json
   def create
     @book = Book.new(book_params)
-    @book.user = current_user
-    @book.owner = current_user.login
-    @book.date_of_realize = Time.new
+    @book.assign_attributes(user: current_user, owner: current_user.login, date_of_realize: Time.new)
     respond_to do |format|
       if @book.save
-        params[:images]['image'].each do |a|
+        params[:images]['image'].each do |src|
           @image = @book.images.create!(
               title: @book.title,
               owner: @book.owner,
-              image: a
+              image: src
           )
         end
         format.html { redirect_to @book, notice: 'Book was successfully created.' }

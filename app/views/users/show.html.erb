@@ -32,14 +32,8 @@
     <%= @user.books_bought  %></br>
     <strong>Seller reputation: </strong>
     <%= @user.reputation  %></br>
-    <strong>Amount of books <%=@status[:sale]%>: </strong>
-    <%= link_to @counts[:for_sale], user_books_path(@user, status: @status[:sale])  %></br>
-    <strong>Amount of books <%=@status[:payment]%>: </strong>
-    <%= link_to @counts[:waiting_for_payment], user_books_path(@user, status: @status[:payment])  %></br>
-    <strong>Amount of books <%=@status[:delivery]%>: </strong>
-    <%= link_to @counts[:awaiting_delivery], user_books_path(@user, status: @status[:delivery])  %></br>
-    <strong>Amount of books <%=@status[:control]%>: </strong>
-    <%= link_to @counts[:awaiting_control], user_books_path(@user, status: @status[:control])  %></br>
+    <strong>Amount of books <%= Book.status.find_value(:for_sale).text %>: </strong>
+
 
 
     <%= link_to "show all products for sale", user_books_path(@user) %>
