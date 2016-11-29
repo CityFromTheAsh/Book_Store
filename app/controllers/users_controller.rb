@@ -10,10 +10,12 @@ class UsersController < ApplicationController
 
   def show
     @counts = {
-        for_sale: count('for_sale'),
-        # waiting_for_payment: count(@status[:waiting_for_payment]),
-        # awaiting_delivery: count(@status[:delivery]),
-        # awaiting_control: count(@status[:control])
+        for_sale: count(:for_sale),
+        payment: count(:payment),
+        delivery: count(:delivery),
+        control: count(:control),
+        sold: count(:sold),
+        banned: count(:banned)
     }
   end
 

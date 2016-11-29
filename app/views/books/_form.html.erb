@@ -31,10 +31,6 @@
         <%= f.text_field :page_count, class: "form-control"  %>
       </div>
 
-      <div class="field">
-        <%= f.label :date_of_realize %>
-        <%= f.text_field :date_of_realize, class: "form-control"  %>
-      </div>
 
       <div class="field">
         <%= f.label :binding %>
@@ -52,11 +48,10 @@
       </div>
 
       <div class="field">
-        <%= book.to_json %>
       <%= f.fields_for :images, Image.new do |p| %>
           <div class="field">
             <%= p.label :image %><br>
-            <%= p.file_field :image, :multiple => true, name: "images[image][]" %>
+            <%= p.file_field :image, multiple: true, name: "images[image][]" %>
           </div>
       <% end %>
       </div>

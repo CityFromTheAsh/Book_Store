@@ -43,13 +43,13 @@ class BooksController < ApplicationController
   # POST /books.json
   def create
     @book = Book.new(book_params)
-    @book.assign_attributes(user: current_user, owner: current_user.login, date_of_realize: Time.new)
+    @book.assign_attributes(user: current_user, status:Book.status.find_value(:for_sale))
     respond_to do |format|
       if @book.save
         params[:images]['image'].each do |src|
           @image = @book.images.create!(
               title: @book.title,
-              owner: @book.owner,
+              owner: current_user.login,
               image: src
           )
         end
@@ -95,7 +95,7 @@ class BooksController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def book_params
     params.require(:book).permit(
-        :title, :author, :price, :page_count, :about, :owner, :date_of_realize,
+        :title, :author, :price, :page_count, :about, :date_of_realize,
         :binding, :genre, :book_for_sell, images_attributes: [:id, :books_id, :image])
   end
 end
