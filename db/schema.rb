@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 20161129120749) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "books", force: :cascade do |t|
     t.string   "title"
     t.string   "author"
@@ -27,10 +30,10 @@ ActiveRecord::Schema.define(version: 20161129120749) do
     t.string   "status",     default: "for sale", null: false
     t.integer  "order_id"
     t.integer  "message_id"
-    t.index ["image_id"], name: "index_books_on_image_id"
-    t.index ["message_id"], name: "index_books_on_message_id"
-    t.index ["order_id"], name: "index_books_on_order_id"
-    t.index ["user_id"], name: "index_books_on_user_id"
+    t.index ["image_id"], name: "index_books_on_image_id", using: :btree
+    t.index ["message_id"], name: "index_books_on_message_id", using: :btree
+    t.index ["order_id"], name: "index_books_on_order_id", using: :btree
+    t.index ["user_id"], name: "index_books_on_user_id", using: :btree
   end
 
   create_table "images", force: :cascade do |t|
@@ -38,9 +41,9 @@ ActiveRecord::Schema.define(version: 20161129120749) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "book_id"
-    t.string   "title"
     t.string   "owner"
-    t.index ["book_id"], name: "index_images_on_book_id"
+    t.string   "title"
+    t.index ["book_id"], name: "index_images_on_book_id", using: :btree
   end
 
   create_table "messages", force: :cascade do |t|
@@ -52,10 +55,10 @@ ActiveRecord::Schema.define(version: 20161129120749) do
     t.integer  "book_id"
     t.integer  "sender_id"
     t.integer  "recipient_id"
-    t.index ["book_id"], name: "index_messages_on_book_id"
-    t.index ["recipient_id"], name: "index_messages_on_recipient_id"
-    t.index ["sender_id"], name: "index_messages_on_sender_id"
-    t.index ["user_id"], name: "index_messages_on_user_id"
+    t.index ["book_id"], name: "index_messages_on_book_id", using: :btree
+    t.index ["recipient_id"], name: "index_messages_on_recipient_id", using: :btree
+    t.index ["sender_id"], name: "index_messages_on_sender_id", using: :btree
+    t.index ["user_id"], name: "index_messages_on_user_id", using: :btree
   end
 
   create_table "orders", force: :cascade do |t|
@@ -66,8 +69,8 @@ ActiveRecord::Schema.define(version: 20161129120749) do
     t.datetime "updated_at", null: false
     t.integer  "book_id"
     t.integer  "user_id"
-    t.index ["book_id"], name: "index_orders_on_book_id"
-    t.index ["user_id"], name: "index_orders_on_user_id"
+    t.index ["book_id"], name: "index_orders_on_book_id", using: :btree
+    t.index ["user_id"], name: "index_orders_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -93,10 +96,23 @@ ActiveRecord::Schema.define(version: 20161129120749) do
     t.float    "reputation",             default: 0.0
     t.boolean  "ban",                    default: false
     t.integer  "message_id"
-    t.index ["books_id"], name: "index_users_on_books_id"
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["message_id"], name: "index_users_on_message_id"
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["books_id"], name: "index_users_on_books_id", using: :btree
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["message_id"], name: "index_users_on_message_id", using: :btree
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "books", "images"
+  add_foreign_key "books", "messages"
+  add_foreign_key "books", "orders"
+  add_foreign_key "books", "users"
+  add_foreign_key "images", "books"
+  add_foreign_key "messages", "books"
+  add_foreign_key "messages", "users"
+  add_foreign_key "messages", "users", column: "recipient_id"
+  add_foreign_key "messages", "users", column: "sender_id"
+  add_foreign_key "orders", "books"
+  add_foreign_key "orders", "users"
+  add_foreign_key "users", "books", column: "books_id"
+  add_foreign_key "users", "messages"
 end
