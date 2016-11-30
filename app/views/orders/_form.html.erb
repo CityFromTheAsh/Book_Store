@@ -15,17 +15,17 @@
 
   <div class="field">
     <%= f.label :seller %>
-    <%= f.label @order.seller %>
+    <%= f.label @order.book.user.login %>
   </div>
 
   <div class="field">
     <%= f.label :buyer %>
-    <%= f.text_field :buyer %>
+    <%= f.label @order.buyer %>
   </div>
 
   <div class="field">
     <%= f.label :admin %>
-    <%= f.text_field :admin %>
+    <%= f.label @order.admin %>
   </div>
 
   <div class="actions">

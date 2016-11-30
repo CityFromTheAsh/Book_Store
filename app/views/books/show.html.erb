@@ -51,7 +51,7 @@
 
 <p>
   <strong>Status:</strong>
-  <%= @book.status %>
+  <%= Book.status.find_value(@book.status).text %>
 </p>
 
 <% if current_user.present? %>
