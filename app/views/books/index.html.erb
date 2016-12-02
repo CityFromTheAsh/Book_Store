@@ -17,54 +17,75 @@
 <div class="book_table">
   <div>
     <div class="row table-head">
-      <div class="col-xs-2 book_col">
+      <div class="col-xs-5">
         <%=link_to 'Title', books_path(sort:'title'), class: 'auto_field_size' %>
       </div>
-      <div class="col-xs-2 book_col">
+      <div class="col-xs-2">
         <%=link_to 'Author', books_path(sort:'author'), class: 'auto_field_size' %>
       </div>
-      <div class="col-xs-2 book_col">
+      <div class="col-xs-1">
         <%=link_to 'Price', books_path(sort:'price'), class: 'auto_field_size' %>
       </div>
-      <div class="col-xs-2 book_col">
+      <div class="col-xs-1">
         <%=link_to 'User', books_path(sort:'user_id'), class: 'auto_field_size' %>
       </div>
-      <div class="col-xs-2 book_col">
-        <%=link_to 'Binding', books_path(sort:'binding'), class: 'auto_field_size' %>
-      </div>
-
-
     </div>
   </div>
   <div class="accordion-menu">
     <% @books.each do |book| %>
     <div class="row selectable accordion">
-      <div class="col-xs-2 book_col"><div class='auto_field_size'><%= book.title  %></div></div>
+      <div class="col-xs-5 book_col"><div class='auto_field_size'><%= book.title.upcase  %></div></div>
       <div class="col-xs-2 book_col"><%= to_high book.author %></div>
-      <div class="col-xs-2 book_col"><%= book.price %></div>
-      <div class="col-xs-2 book_col"><%= book.user.login %></div>
-      <div class="col-xs-2 book_col"><%= book.binding %></div>
+      <div class="col-xs-1 book_col"><%= book.price %></div>
+      <div class="col-xs-1 book_col"><%= book.user.login %></div>
       <div><%= image_tag book.images.first.image.url, size: '150x100', class:'col-xs-2' if book.images.first.present? %></div>
     </div>
 
-    <div class="product_info">
-      <%= link_to 'Show', book %>
-      <% if admin? current_user %>
+    <div class="product_info row">
+      <div class="col-xs-6">
+        <%= link_to 'Show', book %>
+        <% if admin? current_user %>
           <%= link_to 'Edit', edit_book_path(book) %>
           <%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %>
-      <% end %>
-      <p> Created at :  <%= book.created_at %></p>
-      <p> Binding : <%= book.binding %></p>
-      <p> Genre : <%= book.genre %></p>
-      <p> About : <%= book.about %></p>
-    </div>
-    <% end %>
-  </div>
-</div>
-  </div>
+        <% end %>
+        <p> Created at :  <%= book.created_at %></p>
+        <p> Binding : <%= book.binding %></p>
+        <p> Genre : <%= book.genre %></p>
+        <p> About : <%= book.about %></p>
+      </div>
+      <!-- Carousel
+================================================== -->
+      <div id="myCarousel<%=book.id.to_s%>" class="carousel slide col-xs-6 img-bord" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+          <% book.images.length.times do |i| %>
+          <li data-target="#myCarousel<%=book.id.to_s%>" data-slide-to="<%= i.to_s %>"></li>
+          <%end%>
 
-  <br>
-</nav>
+        </ol>
+        <div>
+        <div class="carousel-inner">
+          <% book.images.each do |p| %>
+              <% if p==book.images.first %>
+                <div class="item active">
+                  <%= image_tag p.image.url, size: '300x200' %>
+                </div>
+              <%else%>
+                <div class="item">
+                  <%= image_tag p.image.url, size: '300x200' %>
+                </div>
+              <% end %>
+          <% end %>
+        </div>
+        <a class="left carousel-control" href="#myCarousel<%=book.id.to_s%>" role="button" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+        <a class="right carousel-control" href="#myCarousel<%=book.id.to_s%>" role="button" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+      </div><!-- /.carousel -->
+    </div>
+  </div>
+  <% end %>
+  </div>
+  </div>
+    <br>
 <%= paginate @books %>
 
 

@@ -3,7 +3,7 @@
 
 <p>
   <strong>Title:</strong>
-  <%= @book.title %>
+  <%= @book.title.upcase %>
 </p>
 <% @book.images.each do |p| %>
     <%= image_tag p.image.url, size: '150x100' %>
@@ -11,7 +11,7 @@
 
 <p>
   <strong>Author:</strong>
-  <%= @book.author %>
+  <%= to_high @book.author %>
 </p>
 
 <p>
