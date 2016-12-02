@@ -7,14 +7,13 @@ class BooksController < ApplicationController
   def index
     @books = Book.all
     if params[:login].present?
-      puts '++++++++++++++++++++'
-      user = User.where(login: params[:login])
-      puts user.to_json
-      @books =  @books.where(user:  user) if user.present?
+      login = params[:login].downcase
+      user = User.where(login: login)
+      @books =  @books.where(user: user) if user.present?
       puts @books.to_json
     end
     if params[:search].present?
-      search_strings = params[:search].gsub(/[^\w\sА-Яа-я ]/, '')
+      search_strings = params[:search].gsub(/[^\w\sА-Яа-я ]/, '').downcase
       fields = @books.columns.select { |c| c.type == :string }.map { |c| c.name }
       where_sql = fields.map { |field| "#{field} LIKE '%#{search_strings}%'" }.join(' OR ')
       @books = @books.where(where_sql)
@@ -51,6 +50,8 @@ class BooksController < ApplicationController
   # POST /books.json
   def create
     @book = Book.new(book_params)
+    @book.title.downcase!
+    @book.author.downcase!
     @book.assign_attributes(user: current_user, status:Book.status.find_value(:for_sale))
     respond_to do |format|
       if @book.save
