@@ -5,19 +5,26 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index
+    @books = Book.all
+    if params[:login].present?
+      puts '++++++++++++++++++++'
+      user = User.where(login: params[:login])
+      puts user.to_json
+      @books =  @books.where(user:  user) if user.present?
+      puts @books.to_json
+    end
     if params[:search].present?
       search_strings = params[:search].gsub(/[^\w\sА-Яа-я ]/, '')
-      fields = Book.columns.select { |c| c.type == :string }.map { |c| c.name }
+      fields = @books.columns.select { |c| c.type == :string }.map { |c| c.name }
       where_sql = fields.map { |field| "#{field} LIKE '%#{search_strings}%'" }.join(' OR ')
-      @books = Book.where(where_sql)
+      @books = @books.where(where_sql)
     else
       #TODO: status should'nt be param
-      @books = Book.where(status: (params[:status] || :for_sale))
-      @books= Book.all
       @books = @books.where(user_id: params[:user_id]) if params[:user_id].present?
       @books = @books.where(author: params[:book_id]) if params[:book_id].present?
       @books = @books.order(params[:sort])
     end
+    @books = @books.where(status: (params[:status] || :for_sale))
     @books = @books.page(params[:page])
   end
 

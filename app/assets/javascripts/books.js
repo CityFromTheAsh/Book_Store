@@ -1,3 +1,5 @@
 $(document).ready(function(){
-    $('.accordion-menu').accordion();
+   $('.accordion').click(function () {
+        $(this).next().toggle();
+   });
 });

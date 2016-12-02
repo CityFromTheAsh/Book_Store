@@ -4,29 +4,42 @@
   <h1>Books</h1>
   <!--TODO:Remove <script> -->
   <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
+  <div class="col-xs-2">
+    <%= form_tag books_path, :method => 'get' do %>
+        <%= label_tag 'Find word'%>
+        <%= text_field_tag :search, params[:search], class:'auto_field_size' %>
+        <%= label_tag 'Find login'%>
+        <%= text_field_tag :login, params[:login], class:'auto_field_size' %>
+        <%= submit_tag "Search", :name => nil %>
+    <% end %>
+  </div>
   <div class="wrapper">
 <div class="book_table">
   <div>
     <div class="row table-head">
-      <div class="col-xs-2 book_col"><%=link_to 'Title', books_path(sort:'title') %></div>
-      <div class="col-xs-2 book_col"><%=link_to 'Author', books_path(sort:'author') %></div>
-      <div class="col-xs-2 book_col"><%=link_to 'Price', books_path(sort:'price') %></div>
-      <div class="col-xs-2 book_col"><%=link_to 'User', books_path(sort:'user_id') %></div>
-      <div class="col-xs-2 book_col"><%=link_to 'Binding', books_path(sort:'binding') %></div>
-      <div class="col-xs-2">
-        <%= form_tag books_path, :method => 'get' do %>
-            <p>
-              <%= text_field_tag :search, params[:search], class:'search_text' %>
-              <%= submit_tag "Search", :name => nil %>
-            </p>
-        <% end %>
+      <div class="col-xs-2 book_col">
+        <%=link_to 'Title', books_path(sort:'title'), class: 'auto_field_size' %>
       </div>
+      <div class="col-xs-2 book_col">
+        <%=link_to 'Author', books_path(sort:'author'), class: 'auto_field_size' %>
+      </div>
+      <div class="col-xs-2 book_col">
+        <%=link_to 'Price', books_path(sort:'price'), class: 'auto_field_size' %>
+      </div>
+      <div class="col-xs-2 book_col">
+        <%=link_to 'User', books_path(sort:'user_id'), class: 'auto_field_size' %>
+      </div>
+      <div class="col-xs-2 book_col">
+        <%=link_to 'Binding', books_path(sort:'binding'), class: 'auto_field_size' %>
+      </div>
+
+
     </div>
   </div>
   <div class="accordion-menu">
     <% @books.each do |book| %>
-    <div class="row selectable">
-      <div class="col-xs-2 book_col"><%= book.title %></div>
+    <div class="row selectable accordion">
+      <div class="col-xs-2 book_col"><div class='auto_field_size'><%= book.title  %></div></div>
       <div class="col-xs-2 book_col"><%= book.author %></div>
       <div class="col-xs-2 book_col"><%= book.price %></div>
       <div class="col-xs-2 book_col"><%= book.user.login %></div>
