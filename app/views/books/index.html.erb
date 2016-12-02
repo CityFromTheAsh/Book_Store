@@ -40,7 +40,7 @@
     <% @books.each do |book| %>
     <div class="row selectable accordion">
       <div class="col-xs-2 book_col"><div class='auto_field_size'><%= book.title  %></div></div>
-      <div class="col-xs-2 book_col"><%= book.author %></div>
+      <div class="col-xs-2 book_col"><%= to_high book.author %></div>
       <div class="col-xs-2 book_col"><%= book.price %></div>
       <div class="col-xs-2 book_col"><%= book.user.login %></div>
       <div class="col-xs-2 book_col"><%= book.binding %></div>
