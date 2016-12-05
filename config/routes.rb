@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     member do
       put :ban
     end
+    get :payment
   end
   resources :books do
     resources :orders

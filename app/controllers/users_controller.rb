@@ -25,6 +25,10 @@ class UsersController < ApplicationController
   def reviews
   end
 
+  def payment
+    
+  end
+
   def ban
     @user.update(ban: !@user.ban)
     respond_to do |format|

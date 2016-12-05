@@ -28,7 +28,7 @@
                 <% end %>
                 <% if current_user.present? %>
                   <li class="divider"></li>
-                  <li class="dropdown-header">Balance:<%=current_user.balance%> </li>
+                  <li class="dropdown-header">Balance:<%=link_to current_user.balance, user_payment_path(user_id:current_user)%> </li>
                   <li><%= link_to "Messages", messages_path, method: :get %></li>
                   <li><a href="#">Options</a></li><!--TODO: update -->
 
