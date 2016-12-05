@@ -41,7 +41,7 @@
               <ul class="dropdown-menu" role="menu">
                 <% Book.status.values.each do |value| %>
                     <li>
-                      <%= link_to Book.status.find_value(value).text + ':' +@counts[value.to_sym].to_s, user_books_path(current_user, status: value) %>
+                      <%= link_to Book.status.find_value(value).text + ':' +@book_counts[value.to_sym].to_s, user_books_path(current_user, status: value) %>
                     </li>
                 <% end %>
               </ul>

@@ -54,7 +54,7 @@
   <%= Book.status.find_value(@book.status).text %>
 </p>
 
-<% if current_user.present? %>
+<% if current_user.present? && current_user.balance >= 0 %>
     <%= link_to 'buy it', new_book_order_path(@book)%> |
     <%if current_user.admin %>
         <%= link_to 'Edit', edit_book_path(@book) %>

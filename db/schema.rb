@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161130135959) do
+ActiveRecord::Schema.define(version: 20161205134052) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,14 +23,16 @@ ActiveRecord::Schema.define(version: 20161130135959) do
     t.string   "about"
     t.boolean  "binding"
     t.string   "genre"
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
     t.integer  "user_id"
     t.integer  "image_id"
-    t.string   "status",     default: "for sale", null: false
+    t.string   "status",              default: "for sale", null: false
     t.integer  "order_id"
     t.integer  "message_id"
+    t.integer  "last_bought_book_id"
     t.index ["image_id"], name: "index_books_on_image_id", using: :btree
+    t.index ["last_bought_book_id"], name: "index_books_on_last_bought_book_id", using: :btree
     t.index ["message_id"], name: "index_books_on_message_id", using: :btree
     t.index ["order_id"], name: "index_books_on_order_id", using: :btree
     t.index ["user_id"], name: "index_books_on_user_id", using: :btree
@@ -105,6 +107,7 @@ ActiveRecord::Schema.define(version: 20161130135959) do
   add_foreign_key "books", "messages"
   add_foreign_key "books", "orders"
   add_foreign_key "books", "users"
+  add_foreign_key "books", "users", column: "last_bought_book_id"
   add_foreign_key "images", "books"
   add_foreign_key "messages", "books"
   add_foreign_key "messages", "users"

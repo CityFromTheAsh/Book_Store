@@ -5,6 +5,7 @@ class User < ApplicationRecord
   has_many :books
   has_many :orders
   has_many :messages
+  has_one  :last_bought_book, class_name: 'Book'
 
   mount_uploader :avatar, AvatarUploader
 

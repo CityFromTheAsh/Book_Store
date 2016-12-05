@@ -34,11 +34,8 @@ class OrdersController < ApplicationController
   # POST /orders.json
   def create
     @order = Order.new()
-    @order.book.update(status: "waiting for payment")
     respond_to do |format|
       if @order.save
-        puts '----------------------------------------------'
-        puts @order.book.to_json
         format.html { redirect_to @order, notice: 'Order was successfully created.' }
         format.json { render :show, status: :created, location: @order }
       else
@@ -52,7 +49,11 @@ class OrdersController < ApplicationController
   # PATCH/PUT /orders/1.json
   def update
     respond_to do |format|
-        @order.book.update(status: :payment)
+      Order.transaction do
+        @order.pay_for_book(current_user, @order.book)
+        current_user.update(last_bought_book: @order.book)
+      end
+
         format.html { redirect_to @order, notice: 'Order was successfully updated.' }
         format.json { render :show, status: :ok, location: @order }
     end
