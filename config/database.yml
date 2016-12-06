@@ -28,7 +28,7 @@ test:
 
 production:
   <<: *default
-  database: db/production.postgresql
-  username: myapp
-  password: password1
+  database: book_store_production
+  username: postgres
+  password: 4874
 
