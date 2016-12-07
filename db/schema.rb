@@ -39,11 +39,11 @@ ActiveRecord::Schema.define(version: 20161206101521) do
   end
 
   create_table "contacts", force: :cascade do |t|
-    t.string   "firstname"
-    t.string   "lastname"
-    t.string   "email"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "firstname",  default: "", null: false
+    t.string   "lastname",   default: "", null: false
+    t.string   "email",      default: "", null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   create_table "images", force: :cascade do |t|
