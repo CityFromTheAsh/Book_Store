@@ -3,6 +3,20 @@
     <div class="form-group">
       <%= f.hidden_field :sender_id, value: current_user.id %>
       <%= f.hidden_field :recipient_id, value: params[:user_id] %>
+      <% if params[:book].present? %>
+          <% if params[:book].present? %>
+              <%= f.hidden_field :book_id, value: params[:book] %>
+              <%= f.hidden_field :recipient_id, value: Book.find(params[:book]).order.user_id %>
+          <% end %>
+          <div class="field">
+            <%= f.fields_for :images, Image.new do |p| %>
+                <div class="field">
+                  <%= p.label :image %><br>
+                  <%= p.file_field :image, multiple: true, name: "images[image][]" %>
+                </div>
+            <% end %>
+          </div>
+      <% end %>
       <div class="field">
         <%= f.label :message %></br>
         <%= f.text_area :message %>

@@ -55,12 +55,14 @@ class BooksController < ApplicationController
     @book.assign_attributes(user: current_user, status:Book.status.find_value(:for_sale))
     respond_to do |format|
       if @book.save
-        params[:images]['image'].each do |src|
-          @image = @book.images.create!(
-              title: @book.title,
-              owner: current_user.login,
-              image: src
-          )
+        if params[:images].present? && params[:images]['image'].present?
+          params[:images]['image'].each do |src|
+            @image = @book.images.create!(
+                title: @book.title,
+                owner: current_user.login,
+                image: src
+            )
+          end
         end
         format.html { redirect_to @book, notice: 'Book was successfully created.' }
         format.json { render :show, status: :created, location: @book }
@@ -76,6 +78,15 @@ class BooksController < ApplicationController
   def update
     respond_to do |format|
       if @book.update(book_params)
+        if params[:images].present? && params[:images]['image'].present?
+          params[:images]['image'].each do |src|
+            @image = @book.images.create!(
+                title: @book.title,
+                owner: current_user.login,
+                image: src
+            )
+          end
+        end
         format.html { redirect_to @book, notice: 'Book was successfully updated.' }
         format.json { render :show, status: :ok, location: @book }
       else

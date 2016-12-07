@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :book do
     author 'someAuthor'
-    price 1_000
+    price 100
     title 'bookTitle'
   end
 end

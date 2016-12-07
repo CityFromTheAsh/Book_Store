@@ -1,32 +1,36 @@
 <%= render 'layouts/top_panel' %>
 <p id="notice"><%= notice %></p>
 
-  <strong>Sender: </strong>
-  <%= @message.sender.login%>
-  </br>
-  <% if @message.book.present? %>
+<strong>Sender: </strong>
+<%= @message.sender.login%>
+</br>
+<% if @message.book.present? %>
     <strong>Book title: </strong>
     <%= @message.book.title%>
     </br>
     <strong>Book author: </strong>
     <%=@message.book.author%>
-
+    <% if @message.book.images.each do |p| %>
+        <%= image_tag p.image.url, size: '150x100' %>
+    <% end %>
+    <% end %>
 <% else %>
     <strong>Recipient: </strong>
     <%= @message.recipient.login%>
 <%end%>
-  </br>
-  </br>
-  <strong>Date: </strong>
-    <%= @message.created_at %>
-  </br>
-  </br>
-  <strong>message: </strong>
-  <%= @message.message %>
-    <% if current_user.present? && (current_user == @message.sender)%>
-        <%=link_to 'Edit' %>
-    <% end %>
-    </br>
-  <%=link_to 'back', messages_path %>
+</br>
+</br>
+<strong>Date: </strong>
+<%= @message.created_at %>
+</br>
+</br>
+<strong>message: </strong>
+<%= @message.message %>
+<% if current_user.present? && (current_user == @message.sender)%>
+    <%=link_to 'Edit' %>
+<% end %>
+
+</br>
+<%=link_to 'back', messages_path %>
 
 

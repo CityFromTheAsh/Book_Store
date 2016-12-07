@@ -9,8 +9,21 @@ class MessagesController < ApplicationController
   def create
     @message = Message.new(message_params)
     @message.sender = current_user
+    @message.recipient = @message.book.order.user if @message.book.present?
+    #TODO Fix Order and book link
     respond_to do |format|
       if @message.save
+          if params[:images].present? && params[:images]['image'].present?
+            params[:images]['image'].each do |src|
+              @image = @message.book.images.create!(
+                  title: @message.book.title,
+                  owner: @message.book.user.login,
+                  image: src
+              )
+            end
+            @message.book.save
+            @message.book.update(status: :control)
+          end
         format.html { redirect_to @message, notice: 'Message was successfully created.' }
         format.json { render :show, status: :created, location: @message }
       else
@@ -39,7 +52,9 @@ class MessagesController < ApplicationController
   private
 
   def message_params
-    params.require(:message).permit(:message, :book_id, :sender_id, :recipient_id)
+    params.require(:message).permit(:message, :book_id, :sender_id, :recipient_id,
+                                    images_attributes: [:id, :books_id, :image])
+                                    #books_attributes:[:book_id])
   end
 
   def set_message

@@ -18,9 +18,9 @@ class OrdersController < ApplicationController
   def new
     @book = Book.find(params[:book_id])
     if @book.order.nil?
-      @book.order = Order.new(book: @book, buyer: current_user.login,  admin: "new admin")
+      @book.order = Order.new(book: @book, user: current_user,  admin: "new admin")
     else
-      @book.order.buyer = current_user.login
+      @book.order.user = current_user
     end
     @book.order.save
     @order = @book.order
@@ -33,9 +33,10 @@ class OrdersController < ApplicationController
   # POST /orders
   # POST /orders.json
   def create
-    @order = Order.new()
+    @order = Order.new(order_params)
     respond_to do |format|
       if @order.save
+        puts @order.book
         format.html { redirect_to @order, notice: 'Order was successfully created.' }
         format.json { render :show, status: :created, location: @order }
       else

@@ -20,7 +20,7 @@
 
   <div class="field">
     <%= f.label :buyer %>
-    <%= f.label @order.buyer %>
+    <%= f.label @order.user.login %>
   </div>
 
   <div class="field">
@@ -28,8 +28,8 @@
     <%= f.label @order.admin %>
   </div>
 
-  <div class="actions">
-    <%= f.submit %>
+  <div class="actions", id="update">
+    <%= f.submit  %>
   </div>
     </div>
 <% end %>
