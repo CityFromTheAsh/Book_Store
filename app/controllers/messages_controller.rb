@@ -10,7 +10,6 @@ class MessagesController < ApplicationController
     @message = Message.new(message_params)
     @message.sender = current_user
     @message.recipient = @message.book.order.user if @message.book.present?
-    #TODO Fix Order and book link
     respond_to do |format|
       if @message.save
           if params[:images].present? && params[:images]['image'].present?
@@ -54,7 +53,6 @@ class MessagesController < ApplicationController
   def message_params
     params.require(:message).permit(:message, :book_id, :sender_id, :recipient_id,
                                     images_attributes: [:id, :books_id, :image])
-                                    #books_attributes:[:book_id])
   end
 
   def set_message
