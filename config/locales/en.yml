@@ -26,6 +26,6 @@ en:
         for_sale: 'Waiting for sale'
         payment: 'Waiting for payment'
         delivery: 'Waiting for delivery'
-        control: 'Waiting for decision of the administrator'
+        control: 'Waiting for decision of the administrator or customer response'
         sold: 'Product is sold'
         banned: 'Product was baned by admin'
