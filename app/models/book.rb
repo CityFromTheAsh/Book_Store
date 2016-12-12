@@ -26,8 +26,16 @@ class Book < ApplicationRecord
       INNER JOIN books as books2 ON books2.created_at = find_last_books.last_time_books_creating
       INNER JOIN users on books2.user_id = users.id
       GROUP BY users.login, books2.title;'
-      # desired_time = "MAX(created_at)"
-      # single = ('('+(select.('MAX(created_at) as last_created').joins(:users).group('users.login')).to_s+') as single').to_sql
-      # full_book = single.joins('INNER JOIN books ON books.created_at = single.last_created')
+
+      complex_table_sql = '(SELECT MAX(books1.created_at) AS last_time_books_creating
+          FROM books books1
+          INNER JOIN users ON users.id = books1.user_id
+          GROUP BY users.login) find_last_books'
+      Book
+          .select('users.login, books2.*')
+          .from(complex_table_sql)
+          .joins('INNER JOIN books as books2 ON books2.created_at = find_last_books.last_time_books_creating')
+          .joins('INNER JOIN users on books2.user_id = users.id')
+          .joins('GROUP BY users.login, books2.id')
     end
 end

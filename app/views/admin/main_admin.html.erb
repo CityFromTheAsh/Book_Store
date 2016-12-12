@@ -6,6 +6,15 @@
     <%= text_area_tag :sql_request, params[:sql_request]%>
     <%= submit_tag "do", :name => nil %>
     <% if @records_array.present? %>
-        <%= @records_array.to_json %>
+        <% @records_array.values.each do |value|%>
+            <div class="row">
+              <% value.each do |elem|%>
+                  <%= label_tag elem,
+                                elem,
+                                class:'col-xs-2' %>
+              <% end %>
+            </div>
+            <br><br><br>
+        <% end %>
     <% end %>
 <% end %>
