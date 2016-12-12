@@ -3,6 +3,7 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all.page(params[:page])
+    @users.order(:login)
   end
 
   def edit
@@ -30,7 +31,12 @@ class UsersController < ApplicationController
   end
 
   def ban
-    @user.update(ban: !@user.ban)
+    puts '++++++++++++++++++++++++++++'
+    puts @user
+    puts @user.ban
+    @user.ban = @user.ban ? false : true
+    puts @user.ban
+    @user.save
     respond_to do |format|
       format.html { redirect_to :back }
       format.js { render json: {}, status: :ok }

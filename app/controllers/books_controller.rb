@@ -18,7 +18,6 @@ class BooksController < ApplicationController
       where_sql = fields.map { |field| "#{field} LIKE '%#{search_strings}%'" }.join(' OR ')
       @books = @books.where(where_sql)
     else
-      #TODO: status should'nt be param
       @books = @books.where(user_id: params[:user_id]) if params[:user_id].present?
       @books = @books.where(author: params[:book_id]) if params[:book_id].present?
       @books = @books.order(params[:sort])

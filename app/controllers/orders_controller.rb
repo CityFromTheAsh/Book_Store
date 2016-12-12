@@ -54,7 +54,6 @@ class OrdersController < ApplicationController
         @order.pay_for_book(current_user, @order.book)
         current_user.update(last_bought_book: @order.book)
       end
-
         format.html { redirect_to @order, notice: 'Order was successfully updated.' }
         format.json { render :show, status: :ok, location: @order }
     end

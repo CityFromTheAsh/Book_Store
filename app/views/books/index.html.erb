@@ -2,7 +2,6 @@
 <p id="notice"><%= notice %></p>
 <nav>
   <h1>Books</h1>
-  <!--TODO:Remove <script> -->
   <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
   <div class="col-xs-2">
     <%= form_tag books_path, :method => 'get' do %>
@@ -17,29 +16,31 @@
 <div class="book_table">
   <div>
     <div class="row table-head">
-      <div class="col-xs-5">
+      <div class="col-xs-3">
+      </div>
+      <div class="col-xs-3">
         <%=link_to 'Title', books_path(sort:'title'), class: 'auto_field_size' %>
       </div>
       <div class="col-xs-2">
         <%=link_to 'Author', books_path(sort:'author'), class: 'auto_field_size' %>
       </div>
-      <div class="col-xs-1">
-        <%=link_to 'Price', books_path(sort:'price'), class: 'auto_field_size' %>
+      <div class="col-xs-2">
+        <%=link_to 'Seller', books_path(sort:'user_id'), class: 'auto_field_size' %>
       </div>
-      <div class="col-xs-1">
-        <%=link_to 'User', books_path(sort:'user_id'), class: 'auto_field_size' %>
+      <div class="col-xs-2">
+        <%=link_to 'Price', books_path(sort:'price'), class: 'auto_field_size' %>
       </div>
     </div>
   </div>
   <div class="accordion-menu">
     <% @books.each do |book| %>
     <div class="row selectable accordion">
-      <div class="col-xs-5 book_col"><div class='auto_field_size'><%= book.title.upcase  %></div></div>
+      <div><%= image_tag book.images.first.image.url, size: '150x100', class:'col-xs-3' if book.images.first.present? %></div>
+      <div class="col-xs-3 book_col"><div class='auto_field_size'><%= book.title.upcase  %></div></div>
       <div class="col-xs-2 book_col"><%= to_high book.author %></div>
-      <div class="col-xs-1 book_col"><%= book.price %></div>
-      <div class="col-xs-1 book_col"><%= book.user.login %></div>
-      <div><%= image_tag book.images.first.image.url, size: '150x100', class:'col-xs-2' if book.images.first.present? %></div>
-    </div>
+      <div class="col-xs-2 book_col"><%= book.user.login %></div>
+      <div class="col-xs-2 book_col"><%= book.price %></div>
+          </div>
 
     <div class="product_info row">
       <div class="col-xs-6">

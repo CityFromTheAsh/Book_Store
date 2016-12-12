@@ -28,7 +28,7 @@
           <td class="col-md-1"><%= user.reputation %></td>
           <% if admin? current_user %>
               <td class="col-md-1"><%= user.ban %> </td>
-              <td> <%= link_to 'ban', ban_user_path(user), remote: true, :method => :put, class: 'ban-user' %></td>
+              <td> <%= link_to 'ban', ban_user_path(user.id), remote: false, :method => :put, class: 'ban-user' %></td>
           <% end %>
         </tr>
     <% end %>

@@ -1,7 +1,7 @@
 module BookHelper
   def to_high(string)
     word_array = string.split(' ')
-    word_array.each{|word| word.capitalize!}
+    word_array.each{ |word| word.capitalize! }
     word_array.join(' ')
   end
   def carusel_windows(book_img_len)
@@ -12,6 +12,6 @@ module BookHelper
         result += "<li data-target=\"#myCarousel\" data-slide-to=\"" + i.to_s + "\"></li>"
       end
     end
-    return result
+    result
   end
 end
