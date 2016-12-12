@@ -1,3 +1,11 @@
 <%= render 'layouts/top_panel' %>
-<h1>admin#admin Main</h1>
-<p>Find me in app/views/admin/admin.html.erb</p>
+<h1>Hello Main Admin</h1>
+<p>Find any element by sql command</p>
+<%= form_tag admin_main_admin_path, :method => 'get' do %>
+    <%= label_tag 'SQL command'%>
+    <%= text_area_tag :sql_request, params[:sql_request]%>
+    <%= submit_tag "do", :name => nil %>
+    <% if @records_array.present? %>
+        <%= @records_array.to_json %>
+    <% end %>
+<% end %>

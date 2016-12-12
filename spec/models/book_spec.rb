@@ -30,11 +30,14 @@ RSpec.describe Book, type: :model do
     end
     context 'when book does not have author' do
       before(:each) do
-        @book = Book.new()
+        @book = Book.new
         @book.title = 'This_is_test_title'
         @book.price = 1_000_000
       end
-
+    end
+    context 'check last_books' do
+      Book.last_books_created
+      #puts Book.last_books.books_and_users
     end
   end
 
