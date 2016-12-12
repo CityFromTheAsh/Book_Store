@@ -9,7 +9,11 @@ Rails.application.routes.draw do
 
   resources :messages
   resources :users do
-    resources :books
+    resources :books do
+      member do
+        put :confirm_delivery
+      end
+    end
     resource :messages
     collection do
       get :index

@@ -31,11 +31,7 @@ class UsersController < ApplicationController
   end
 
   def ban
-    puts '++++++++++++++++++++++++++++'
-    puts @user
-    puts @user.ban
     @user.ban = @user.ban ? false : true
-    puts @user.ban
     @user.save
     respond_to do |format|
       format.html { redirect_to :back }

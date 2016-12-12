@@ -13,17 +13,20 @@ feature 'Book management' do
     create_book(user, book)
     puts user.books.last.attributes.slice('title', 'price', 'author')
   end
-  scenario 'book status after create' do
-    create_book(rich_user, book)
-    expect(rich_user.books.last.status).to eq 'for_sale'
+  scenario 'check book status after book create' do
+    create_book(user, book)
+    expect(user.books.last.status).to eq 'for_sale'
   end
-  scenario 'book status after bought by user whith enough money?' do
-    create_book(rich_user, book)
+  scenario 'check book status after bought by user whith enough money?' do
+    create_book(user, book)
+    user_logout
+    user_login(rich_user)
+    visit book_path(user.books.last.id)
     find('a', id:'buy').click
     within(find('div', id:'update')){find('input').click}
     expect(rich_user.books.last.status).to eq 'delivery'
-  end
-  scenario 'book status after bought by user whith not enough money?' do
+    end
+  scenario 'check book status after bought by user whith not enough money?' do
     create_book(user, book)
     find('a', id:'buy').click
     within(find('div', id:'update')){find('input').click}

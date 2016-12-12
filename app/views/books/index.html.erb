@@ -2,7 +2,6 @@
 <p id="notice"><%= notice %></p>
 <nav>
   <h1>Books</h1>
-  <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
   <div class="col-xs-2">
     <%= form_tag books_path, :method => 'get' do %>
         <%= label_tag 'Find word'%>
@@ -35,13 +34,12 @@
   <div class="accordion-menu">
     <% @books.each do |book| %>
     <div class="row selectable accordion">
-      <div><%= image_tag book.images.first.image.url, size: '150x100', class:'col-xs-3' if book.images.first.present? %></div>
+      <div class="col-xs-3 book_col"><%= image_tag book.images.first.image.url, size: '150x100', class:"auto_field_size"  if book.images.first.present? %></div>
       <div class="col-xs-3 book_col"><div class='auto_field_size'><%= book.title.upcase  %></div></div>
       <div class="col-xs-2 book_col"><%= to_high book.author %></div>
       <div class="col-xs-2 book_col"><%= book.user.login %></div>
       <div class="col-xs-2 book_col"><%= book.price %></div>
           </div>
-
     <div class="product_info row">
       <div class="col-xs-6">
         <%= link_to 'Show', book %>
@@ -51,6 +49,12 @@
         <% end %>
         <% if current_user.present? && current_user.login == book.user.login && book.status == 'delivery'%>
           <%= link_to 'confirm delivery', new_message_path(book: book) %>
+        <% end %>
+        <% if current_user.present? && book.order.present? && current_user == book.order.user && book.status == 'control'%>
+            <%= link_to 'ask admin', new_message_path(book: book) %>
+        <% end %>
+        <% if current_user.present? && book.order.present? && current_user == book.order.user && book.status == 'control'%>
+            <%= link_to 'confirm delivery', confirm_delivery_user_book_path(user_id: current_user, id: book),method: :put, data: { confirm: 'Are you sure?' } %>
         <% end %>
         <p> Created at :  <%= book.created_at %></p>
         <p> Binding : <%= book.binding %></p>

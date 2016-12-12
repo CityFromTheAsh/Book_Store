@@ -41,6 +41,16 @@ class BooksController < ApplicationController
   def edit
   end
 
+  def confirm_delivery
+    Book.transaction do
+      book = Book.find(params[:id])
+      book.status = :sold
+      book.user.balance += book.price * 0.96
+      book.save
+      book.user.save
+    end
+  end
+
   def find
     @books = @user.where(author: params[:book_author]) if params[:book_author].present?
   end

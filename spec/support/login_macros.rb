@@ -7,4 +7,8 @@ module LoginMacros
     fill_in 'user_password', with: user.password
     within('div', class: 'actions'){ find('input').click }
   end
+  def user_logout
+    find('os-p', text: 'Log').click
+    find('a', text: 'Log out').click
+  end
 end
