@@ -23,7 +23,7 @@ class BooksController < ApplicationController
       @books = @books.order(params[:sort])
     end
     @books = @books.where(status: (params[:status] || :for_sale))
-    @books = @books.page(params[:page])
+    @books = @books.page(params[:page]).per(5)
   end
 
   # GET /books/1

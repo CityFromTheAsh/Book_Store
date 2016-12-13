@@ -63,11 +63,11 @@
       </div>
       <!-- Carousel
 ================================================== -->
-      <div id="myCarousel<%=book.id.to_s%>" class="carousel slide col-xs-6 img-bord" data-ride="carousel">
+      <div id="myCarousel<%=book.id%>" class="carousel slide col-xs-6 img-bord" data-ride="carousel">
         <!-- Indicators -->
         <ol class="carousel-indicators">
           <% book.images.length.times do |i| %>
-          <li data-target="#myCarousel<%=book.id.to_s%>" data-slide-to="<%= i.to_s %>"></li>
+          <li data-target="#myCarousel<%=book.id%>" data-slide-to="<%= i %>"></li>
           <%end%>
 
         </ol>
@@ -85,8 +85,8 @@
               <% end %>
           <% end %>
         </div>
-        <a class="left carousel-control" href="#myCarousel<%=book.id.to_s%>" role="button" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
-        <a class="right carousel-control" href="#myCarousel<%=book.id.to_s%>" role="button" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+        <a class="left carousel-control" href="#myCarousel<%=book.id%>" role="button" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+        <a class="right carousel-control" href="#myCarousel<%=book.id%>" role="button" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
       </div><!-- /.carousel -->
     </div>
   </div>
