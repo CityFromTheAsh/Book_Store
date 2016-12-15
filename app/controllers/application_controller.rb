@@ -1,7 +1,13 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :set_book_counts
-
+  layout proc {
+    if request.xhr?
+      false
+    else
+      "application"
+    end
+  }
   def set_book_counts
     if current_user.present?
       grouped_count = current_user.books.group(:status).count

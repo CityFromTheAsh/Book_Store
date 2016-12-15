@@ -1,105 +1,116 @@
 <%= render 'layouts/top_panel' %>
 <p id="notice"><%= notice %></p>
+<div class="container">
+  <div class='thumbnail'>
+    <p>
+      <strong>Title: </strong>
+      {{book.title}}
+    </p>
+    <div ng-repeat="img in book.images">
+      <div class="col-md-4">
+        <img ng-src="{{img.image.url}}" class="show_img">
+      </div>
+    </div>
+<%# @book.images.each do |p| %>
+<%#= image_tag p.image.url, size: '150x100' %>
+<%# end %>
 
-<p>
-  <strong>Title:</strong>
-  <%= @book.title.upcase %>
-</p>
-<% @book.images.each do |p| %>
-    <%= image_tag p.image.url, size: '150x100' %>
-<% end %>
+    <p>
+      <strong>Author:</strong>
+      {{book.author}}
+    </p>
 
-<p>
-  <strong>Author:</strong>
-  <%= to_high @book.author %>
-</p>
+    <p>
+      <strong>Price:</strong>
+      {{book.price|currency}}
+    </p>
 
-<p>
-  <strong>Price:</strong>
-  <%= @book.price %>
-</p>
+    <p>
+      <strong>Page count:</strong>
+      {{book.page_count}}
+    </p>
 
-<p>
-  <strong>Page count:</strong>
-  <%= @book.page_count %>
-</p>
-
-<p>
-  <strong>About:</strong>
-  <%= @book.about %>
-</p>
+    <p>
+      <strong>About:</strong>
+      {{book.about}}
+    </p>
 
 
-<p>
-  <strong>Owner:</strong>
-  <%= @book.user.login %>
-</p>
+    <p>
+      <strong>Owner:</strong>
+      {{book.user.login}}
+    </p>
 
-<p>
-  <strong>Created_at:</strong>
-  <%= @book.created_at %>
-</p>
+    <p>
+      <strong>Created_at:</strong>
+      {{book.createdAt|date}}
+    </p>
 
-<p>
-  <strong>Binding:</strong>
-  <%= @book.binding %>
-</p>
+    <p>
+      <strong>Binding:</strong>
+      {{book.binding}}
+    </p>
 
-<p>
-  <strong>Genre:</strong>
-  <%= @book.genre %>
-</p>
+    <p>
+      <strong>Genre:</strong>
+      {{book.genre}}
+    </p>
 
-<p>
-  <strong>Status:</strong>
-  <%= Book.status.find_value(@book.status).text %>
-</p>
+    <p>
+      <strong>Status:</strong>
+      {{book.statusText}}
+    </p>
 
-<% if current_user.present? && current_user.balance >= 0 %>
-    <%= link_to 'buy it', new_book_order_path(@book), id:'buy'%> |
-    <%if current_user.admin %>
-        <%= link_to 'Edit', edit_book_path(@book) %>
-    <% end %>|
-<% end %>
-<%= link_to 'Back', books_path %>
+<%# if current_user.present? && current_user.balance >= 0 %>
+<%#= link_to 'buy it', new_book_order_path(@book), id:'buy'%> |
+<%#if current_user.admin %>
+<%#= link_to 'Edit', edit_book_path(@book) %>
+<%# end %>|
+<%# end %>
+<%#= link_to 'Back', books_path %>
 
-<% @book.messages.each do |message| %>
+<%# @book.messages.each do |message| %>
     <div class="message-field success">
       <div class="col-md-6">
-        <%= image_tag message.book.user.avatar, size: '50x50' %>
-        </div>
+        <%#= image_tag message.book.user.avatar, size: '50x50' %>
+      </div>
       <div class="col-md-1">
         <div class="message-author">
           <strong>Author: </strong>
-          <%= message.book.user.login %>
-          </br>
+          <%#= message.book.user.login %>
+          <br>
         </div>
         <div class="message-time">
           <strong>created_at: </strong>
-          <%= message.created_at %>
-          </br>
+          <%#= message.created_at %>
+          <br>
         </div>
-        </br>
+        <br>
         <div class="message-text">
           <strong>Message: </strong>
-          <%= message.message %>
+          <%#= message.message %>
         </div>
       </div>
-    </div>
-    </br>
-    </br>
-<% end %>
 
-<% if current_user.present? %>
-</br></br></br>
-<strong>Add comment</strong>
-</br>
-    <%= form_for @message do |f|%>
-        <%= f.hidden_field(:book_id, value: @book.id)   %>
-        <%= f.text_area :message %>
-        <%= f.hidden_field(:sender_id, value: current_user.id) %>
-        <div class="actions">
-          <%= f.submit  %>
-        </div>
-    <% end%>
-<% end %>
+      <br>
+      <br>
+<%# end %>
+
+<%# if current_user.present? %>
+      <br>
+      <br>
+      <br>
+      <strong>Add comment</strong>
+      <br>
+<%#= form_for @message do |f|%>
+<%#= f.hidden_field(:book_id, value: @book.id)   %>
+<%#= f.text_area :message %>
+<%#= f.hidden_field(:sender_id, value: current_user.id) %>
+      <div class="actions">
+        <%#= f.submit  %>
+      </div>
+    </div>
+  </div>
+</div>
+<%# end%>
+<%# end %>

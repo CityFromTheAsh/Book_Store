@@ -23,6 +23,9 @@ gem 'carrierwave', '>= 1.0.0.rc', '< 2.0'
 gem 'kaminari'
 gem 'ransack'
 
+gem "js-routes"
+gem 'oxymoron'
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks

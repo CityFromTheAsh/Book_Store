@@ -5,36 +5,53 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index
-    @books = Book.all
-    if params[:login].present?
-      login = params[:login].downcase
-      user = User.where(login: login)
-      @books =  @books.where(user: user) if user.present?
-      puts @books.to_json
+
+    respond_to do |format|
+      format.html
+      format.json {
+        @books = Book.all
+        if params[:login].present?
+          login = params[:login].downcase
+          user = User.where(login: login)
+          @books =  @books.where(user: user) if user.present?
+          puts @books.to_json
+        end
+        if params[:search].present?
+          search_strings = params[:search].gsub(/[^\w\sА-Яа-я ]/, '').downcase
+          fields = @books.columns.select { |c| c.type == :string }.map { |c| c.name }
+          where_sql = fields.map { |field| "#{field} LIKE '%#{search_strings}%'" }.join(' OR ')
+          @books = @books.where(where_sql)
+        else
+          @books = @books.where(user_id: params[:user_id]) if params[:user_id].present?
+          @books = @books.where(author: params[:book_id]) if params[:book_id].present?
+          @books = @books.order(params[:sort])
+        end
+        @books = @books.where(status: (params[:status] || :for_sale))
+        @books = @books.page(params[:page]).per(6)
+      }
     end
-    if params[:search].present?
-      search_strings = params[:search].gsub(/[^\w\sА-Яа-я ]/, '').downcase
-      fields = @books.columns.select { |c| c.type == :string }.map { |c| c.name }
-      where_sql = fields.map { |field| "#{field} LIKE '%#{search_strings}%'" }.join(' OR ')
-      @books = @books.where(where_sql)
-    else
-      @books = @books.where(user_id: params[:user_id]) if params[:user_id].present?
-      @books = @books.where(author: params[:book_id]) if params[:book_id].present?
-      @books = @books.order(params[:sort])
-    end
-    @books = @books.where(status: (params[:status] || :for_sale))
-    @books = @books.page(params[:page]).per(5)
   end
 
   # GET /books/1
   # GET /books/1.json
+
   def show
-    @message = Message.new if current_user.present?
+    respond_to do |format|
+      format.html
+      format.json {
+        @message = Message.new if current_user.present?
+      }
+    end
   end
 
   # GET /books/new
   def new
-    @book = Book.new
+    respond_to do |format|
+      format.html
+      format.json{
+        @book = Book.new
+      }
+    end
   end
 
   # GET /books/1/edit
