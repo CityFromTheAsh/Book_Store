@@ -3,34 +3,42 @@
   <div class="container">
     <h1>Books</h1>
     <h2>For sale</h2>
-    <div ng-repeat="book in books" class="col-md-4">
+    <% @books.each do |book| %>
+    <div  class="col-md-4"><!-- ng-repeat="book in books" -->
       <div class="thumbnail">
         <div>
           <div class="book_main">
-            <img ng-src="{{book.images[0].image.url}}">
-            <p class="title"> {{book.title}} </p>
-            <p class="author"> book author: {{book.author}} </p>
-            <p class="price"> {{book.price | currency}} </p>
-            <p class="date"> {{book.createdAt | date}} </p>
+            <%=image_tag book.images[0].image.url %>
+            <p class="title" id=<%=book.id%>><%= book.title %> </p>
+            <p class="author" id=<%=book.id%>> <%= book.author %> </p>
+            <p class="price" id=<%=book.id%>> <%= book.price %> </p>
+            <p class="date" id=<%=book.id%>> <%= book.created_at %> </p>
           </div>
-          <div class="book_about">
-            <p class="book_about">{{book.about}}</p>
+          <div class="book_about " style="display:none" id=<%=book.id%>>
+            <p ><%= book.about %></p>
           </div>
-          <div>
-            <p class="book_user_login">{{book.user.login}}</p>
-            <p class="book_user_reputation">{{book.user.reputation}}</p>
+          <div class="book_user_login" style="display:none" id=<%=book.id%>>
+            <p class="book_user_login">Seller: <%= book.user.login %></p>
+            <p>Reputation: <%=book.user.reputation %></p>
           </div>
-          <p class="date"></p>
-          <div class="rating">
-            <a class="info" ui-sref="book_path(book)">Seller info</a>
-            <p class="about" ng-click="main($index)">about book</p>
-            <p class="actions" ng-click="plusOne($index)">buy it</p>
+          <p class="date" id=<%=book.id%>></p>
+          <div class="rating" id=<%=book.id%>>
+            <%= link_to 'Show more',book_path(book), class:  'info', id: book.id%>
+              <% if book.user.reputation > 95 %>
+                <p class="good_seller" id=<%=book.id%>>Seller</p>
+              <% else %>
+                <p class="bad_seller" id=<%=book.id%>>Seller</p>
+              <% end %>
+              <p class="about" id=<%=book.id%>>About</p>
           </div>
         </div>
       </div>
     </div>
-    <a class="info" ui-sref="new_book_path">New Book</a>
+    <% end %>
+    <%= paginate @books %>
+    <br>
+    <%=link_to 'New book',new_book_path, class:  'info'  %>
   </div>
-<%#= paginate @books %>
+
 
 </div>

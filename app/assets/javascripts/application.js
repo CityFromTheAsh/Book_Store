@@ -10,21 +10,32 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require oxymoron/underscore
-//= require oxymoron/angular
-//= require oxymoron/angular-resource
-//= require oxymoron/angular-cookies
-//= require oxymoron/angular-ui-router
-//= require oxymoron/ng-notify
-//= require oxymoron
-//= require_self
-// = require_tree .
+
+
 //= require jquery
 //= require bootstrap-sprockets
 //= require jquery_ujs
 //= require js-routes
-var app = angular.module("app", ['ui.router', 'oxymoron']);
-
-app.config(['$stateProvider', function ($stateProvider) {
-    $stateProvider.rails()
-}]);
+//= require_self
+//= require_tree .
+// var app = angular.module("app", ['ui.router', 'oxymoron']);
+//
+// app.config(['$stateProvider', function ($stateProvider) {
+//     $stateProvider.rails()
+// }]);
+//
+// var app = angular.module('GalleryApp', ['ngRoute']);
+// app.config(function ($routeProvider) {
+//     $routeProvider
+//         .when('/', {
+//             controller: 'HomeController',
+//             templateUrl: 'views/home.html'
+//         })
+//         .when('/photos/:id', {
+//                 controller: 'PhotoController'
+//             }
+//         )
+//         .otherwise({
+//             redirectTo: '/'
+//         });
+// });

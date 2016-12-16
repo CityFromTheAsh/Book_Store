@@ -1,6 +1,6 @@
 class MessagesController < ApplicationController
   before_action :set_message, only: [:show, :update, :delete]
-  before_action :authenticate_user!, only: [:index]
+  before_action :authenticate_user!
 
   def new
     @message = Message.new
@@ -9,7 +9,7 @@ class MessagesController < ApplicationController
   def create
     @message = Message.new(message_params)
     @message.sender = current_user
-    @message.recipient = @message.book.order.user if @message.book.present?
+    @message.recipient = (@message.book.order.present? ? @message.book.order.user : @message.book.user) if @message.book.present?
     respond_to do |format|
       if @message.save
           if params[:images].present? && params[:images]['image'].present?

@@ -1,34 +1,33 @@
 class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:show, :index]
+  before_action :banned, except: [:show, :index]
 
   # GET /books
   # GET /books.json
   def index
-
+    @books = Book.all
+    if params[:login].present?
+      login = params[:login].downcase
+      user = User.where(login: login)
+      @books =  @books.where(user: user) if user.present?
+      puts @books.to_json
+    end
+    if params[:search].present?
+      search_strings = params[:search].gsub(/[^\w\sА-Яа-я ]/, '').downcase
+      fields = @books.columns.select { |c| c.type == :string }.map { |c| c.name }
+      where_sql = fields.map { |field| "#{field} LIKE '%#{search_strings}%'" }.join(' OR ')
+      @books = @books.where(where_sql)
+    else
+      @books = @books.where(user_id: params[:user_id]) if params[:user_id].present?
+      @books = @books.where(author: params[:book_id]) if params[:book_id].present?
+      @books = @books.order(params[:sort])
+    end
+    @books = @books.where(status: (params[:status] || :for_sale))
+    @books = @books.page(params[:page]).per(6)
     respond_to do |format|
+      format.json
       format.html
-      format.json {
-        @books = Book.all
-        if params[:login].present?
-          login = params[:login].downcase
-          user = User.where(login: login)
-          @books =  @books.where(user: user) if user.present?
-          puts @books.to_json
-        end
-        if params[:search].present?
-          search_strings = params[:search].gsub(/[^\w\sА-Яа-я ]/, '').downcase
-          fields = @books.columns.select { |c| c.type == :string }.map { |c| c.name }
-          where_sql = fields.map { |field| "#{field} LIKE '%#{search_strings}%'" }.join(' OR ')
-          @books = @books.where(where_sql)
-        else
-          @books = @books.where(user_id: params[:user_id]) if params[:user_id].present?
-          @books = @books.where(author: params[:book_id]) if params[:book_id].present?
-          @books = @books.order(params[:sort])
-        end
-        @books = @books.where(status: (params[:status] || :for_sale))
-        @books = @books.page(params[:page]).per(6)
-      }
     end
   end
 
@@ -36,21 +35,19 @@ class BooksController < ApplicationController
   # GET /books/1.json
 
   def show
+    @message = Message.new if current_user.present?
     respond_to do |format|
       format.html
-      format.json {
-        @message = Message.new if current_user.present?
-      }
+      format.json
     end
   end
 
   # GET /books/new
   def new
+    @book = Book.new
     respond_to do |format|
       format.html
-      format.json{
-        @book = Book.new
-      }
+      format.json
     end
   end
 
@@ -136,6 +133,10 @@ class BooksController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_book
     @book = Book.find(params[:id])
+  end
+
+  def banned
+    redirect_to root_path if (!current_user.admin && current_user.ban)
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

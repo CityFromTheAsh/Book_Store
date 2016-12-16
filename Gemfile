@@ -24,7 +24,6 @@ gem 'kaminari'
 gem 'ransack'
 
 gem "js-routes"
-gem 'oxymoron'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

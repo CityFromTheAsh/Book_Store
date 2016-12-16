@@ -4,113 +4,124 @@
   <div class='thumbnail'>
     <p>
       <strong>Title: </strong>
-      {{book.title}}
+      <%= @book.title %><!--{{book.title}}-->
     </p>
-    <div ng-repeat="img in book.images">
+    <% @book.images.each do |img| %>
+        <div class="col-md-4">
+          <%= image_tag img.image.url, class:'show_img' %>
+        </div>
+    <% end %>
+    <!--<div ng-repeat="img in book.images">
       <div class="col-md-4">
         <img ng-src="{{img.image.url}}" class="show_img">
       </div>
-    </div>
-<%# @book.images.each do |p| %>
-<%#= image_tag p.image.url, size: '150x100' %>
-<%# end %>
+    </div>-->
 
     <p>
       <strong>Author:</strong>
-      {{book.author}}
+      <%= @book.author %>
+      <!--{{book.author}}-->
     </p>
 
     <p>
       <strong>Price:</strong>
-      {{book.price|currency}}
+      <%= @book.price %>
+      <!--{{book.price|currency}}-->
     </p>
 
     <p>
       <strong>Page count:</strong>
-      {{book.page_count}}
+      <%= @book.page_count %>
+      <!--{{book.page_count}}-->
     </p>
 
     <p>
       <strong>About:</strong>
-      {{book.about}}
+      <%= @book.about %>
+      <!--{{book.about}}-->
     </p>
 
 
     <p>
       <strong>Owner:</strong>
-      {{book.user.login}}
+      <%= @book.user.login %>
+      <!--{{book.user.login}}-->
     </p>
 
     <p>
       <strong>Created_at:</strong>
-      {{book.createdAt|date}}
+      <%= @book.created_at %>
+      <!--{{book.createdAt|date}}-->
     </p>
 
     <p>
       <strong>Binding:</strong>
-      {{book.binding}}
+      <%= @book.binding %>
+      <!--{{book.binding}}-->
     </p>
 
     <p>
       <strong>Genre:</strong>
-      {{book.genre}}
+      <%= @book.genre %>
+      <!--{{book.genre}}-->
     </p>
 
     <p>
       <strong>Status:</strong>
-      {{book.statusText}}
+      <%= @book.status %>
+      <!--{{book.statusText}}-->
     </p>
 
-<%# if current_user.present? && current_user.balance >= 0 %>
-<%#= link_to 'buy it', new_book_order_path(@book), id:'buy'%> |
-<%#if current_user.admin %>
-<%#= link_to 'Edit', edit_book_path(@book) %>
-<%# end %>|
-<%# end %>
-<%#= link_to 'Back', books_path %>
+<% if current_user.present? && current_user.balance >= 0 %>
+<%= link_to 'buy it', new_book_order_path(@book), id:'buy'%> |
+<%if current_user.admin %>
+<%= link_to 'Edit', edit_book_path(@book) %>
+<% end %>|
+<% end %>
+<%= link_to 'Back', books_path %>
 
-<%# @book.messages.each do |message| %>
+<% @book.messages.each do |message| %>
     <div class="message-field success">
       <div class="col-md-6">
-        <%#= image_tag message.book.user.avatar, size: '50x50' %>
+        <%= image_tag message.book.user.avatar, size: '50x50' %>
       </div>
       <div class="col-md-1">
         <div class="message-author">
           <strong>Author: </strong>
-          <%#= message.book.user.login %>
+          <%= message.book.user.login %>
           <br>
         </div>
         <div class="message-time">
           <strong>created_at: </strong>
-          <%#= message.created_at %>
+          <%= message.created_at %>
           <br>
         </div>
         <br>
         <div class="message-text">
           <strong>Message: </strong>
-          <%#= message.message %>
+          <%= message.message %>
         </div>
       </div>
 
       <br>
       <br>
-<%# end %>
+<% end %>
 
-<%# if current_user.present? %>
+<% if current_user.present? %>
       <br>
       <br>
       <br>
       <strong>Add comment</strong>
       <br>
-<%#= form_for @message do |f|%>
-<%#= f.hidden_field(:book_id, value: @book.id)   %>
-<%#= f.text_area :message %>
-<%#= f.hidden_field(:sender_id, value: current_user.id) %>
+<%= form_for @message do |f|%>
+<%= f.hidden_field(:book_id, value: @book.id)   %>
+<%= f.text_area :message %>
+<%= f.hidden_field(:sender_id, value: current_user.id) %>
       <div class="actions">
-        <%#= f.submit  %>
+        <%= f.submit  %>
       </div>
     </div>
   </div>
 </div>
-<%# end%>
-<%# end %>
+<% end %>
+<% end %>

@@ -15,7 +15,7 @@
   <tbody>
     <% @orders.each do |order| %>
       <tr>
-        <td><%= order.seller %></td>
+        <td><%= order.book.user.login if (order.book.present? && order.book.user.present?) %></td>
         <td><%= order.buyer %></td>
         <td><%= order.admin %></td>
         <td><%= link_to 'Show', order %></td>

@@ -6,6 +6,7 @@ class OrdersController < ApplicationController
   # GET /orders
   # GET /orders.json
   def index
+    redirect_to root_path if !current_user.admin
     @orders = Order.all
   end
 
