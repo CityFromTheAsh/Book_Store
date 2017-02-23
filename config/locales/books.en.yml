@@ -1,7 +1,14 @@
 en:
   books:
-    header: Books_
-    title: Title_
-    author: Author_
-    price: Price_
-    user: User_
+    header: Books
+    title: Title
+    author: Author
+    price: Price
+    user: User
+    created_at: Created at
+    binding: Binding
+    genre: Genre
+    about: About
+    f_word: Find Word
+    f_login: Find Login
+    submit: Submit
