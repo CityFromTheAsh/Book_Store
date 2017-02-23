@@ -22,6 +22,7 @@ gem 'enumerize'
 gem 'carrierwave', '>= 1.0.0.rc', '< 2.0'
 gem 'kaminari'
 gem 'ransack'
+gem 'rails-i18n', '~> 5.0.0'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

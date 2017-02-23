@@ -12,25 +12,25 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li><%= link_to "Home Page", controller: 'pasteboard', action: 'home'  %></li>
-            <li><%= link_to "About", controller: 'pasteboard', action: "about"  %></li>
-            <li><%= link_to "Contact", controller: 'pasteboard', action: 'contact'  %></li>
-            <li><%= link_to "Find seller", users_path %></li>
+            <li><%= link_to t(:home, scope: :top_panel), controller: 'pasteboard', action: 'home'  %></li>
+            <li><%= link_to t(:about, scope: :top_panel), controller: 'pasteboard', action: "about"  %></li>
+            <li><%= link_to t(:contact, scope: :top_panel), controller: 'pasteboard', action: 'contact'  %></li>
+            <li><%= link_to t(:find, scope: :top_panel), users_path %></li>
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" ><os-p>Log in<span class="caret"></span></os-p></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" ><os-p><%=t(:log_in, scope: :top_panel)%><span class="caret"></span></os-p></a>
               <ul class="dropdown-menu" role="menu">
                 <% if current_user.nil? %>
-                  <li><%= link_to "Log in", new_user_session_path  %></li>
-                  <li><%= link_to "Registration", new_user_registration_path  %></li>
+                  <li><%= link_to t(:log_in, scope: :top_panel), new_user_session_path  %></li>
+                  <li><%= link_to t(:registration, scope: :top_panel), new_user_registration_path  %></li>
                 <% else %>
                     <%= link_to current_user.login, user_path(current_user) %>
-                    <li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
+                    <li><%= link_to t(:log_out, scope: :top_panel), destroy_user_session_path, method: :delete %></li>
                 <% end %>
                 <% if current_user.present? %>
                   <li class="divider"></li>
-                  <li class="dropdown-header">Balance:<%=current_user.balance%> </li>
-                  <li><%= link_to "Messages", messages_path, method: :get %></li>
-                  <li><a href="#">Options</a></li><!--TODO: update -->
+                  <li class="dropdown-header"><%=t(:balance, scope: :top_panel)%><%=current_user.balance%> </li>
+                  <li><%= link_to t(:messages, scope: :top_panel), messages_path, method: :get %></li>
+                  <li><a href="#"><%=t(:options, scope: :top_panel)%></a></li><!--TODO: update -->
                 <% end %>
               </ul>
             </li>
