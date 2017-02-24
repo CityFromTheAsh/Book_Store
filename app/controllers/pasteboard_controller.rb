@@ -1,6 +1,10 @@
 class PasteboardController < ApplicationController
   after_action :allow_iframe, only: :home
   def home
+    @video = Yt::Video.new id:  'XC-jnqGH-sI'
+    Yt.configure do |config|
+      config.log_level = :debug
+    end
   end
 
   def about
@@ -12,6 +16,6 @@ class PasteboardController < ApplicationController
   private
 
   def allow_iframe
-    response.headers.except! 'X-Frame-Options'
+    response.headers.delete "X-Frame-Options"
   end
 end

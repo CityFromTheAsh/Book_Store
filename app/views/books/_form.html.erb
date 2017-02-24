@@ -34,7 +34,7 @@
 
       <div class="field">
         <%= f.label t(:binding, scope: :books) %>
-        <%= f.select :binding, binding:[:hardcover, :softcover] %>
+        <%= I18n.locale == :en ? f.select :binding, binding:[:hardcover, :softcover] : f.select :binding, binding:[:твёрдый, :мягкий]%>
       </div>
 
       <div class="field">
