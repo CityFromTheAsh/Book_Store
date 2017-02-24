@@ -1,3 +1,3 @@
-class Option
-  belongs_to :users
-end
+# class Option
+#   belongs_to :users
+# end
