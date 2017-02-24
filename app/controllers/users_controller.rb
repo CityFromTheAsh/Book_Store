@@ -19,9 +19,6 @@ class UsersController < ApplicationController
     }
   end
 
-  def sold
-  end
-
   def reviews
   end
 
