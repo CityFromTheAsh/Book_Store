@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'yt', '~> 0.28.0'
-gem 'fog'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
 # Use sqlite3 as the database for Active Record
@@ -17,6 +16,10 @@ gem 'coffee-rails', '~> 4.2'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
+
+gem 'rmega'
+gem 'yt', '~> 0.28.0'
+gem 'fog'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'devise'
 gem 'enumerize'

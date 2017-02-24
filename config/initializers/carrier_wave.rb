@@ -1,5 +1,6 @@
+#
 # CarrierWave.configure do |config|
-#   config.fog_provider = 'fog/mega'                        # required
+#   config.fog_provider = 'mega'                        # required
 #   config.fog_credentials = {
 #       provider:              'MEGA',                        # required
 #       aws_access_key_id:     'xxx',                        # required
@@ -12,4 +13,3 @@
 #   config.fog_public     = false                                        # optional, defaults to true
 #   config.fog_attributes = { 'Cache-Control' => "max-age=#{365.day.to_i}" } # optional, defaults to {}
 # end
-#

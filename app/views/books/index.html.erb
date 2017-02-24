@@ -42,7 +42,7 @@
     <div class="product_info row">
       <div class="col-xs-6">
         <%= link_to 'Show', book %>
-        <% if admin? current_user %>
+        <% if permission? book, current_user  %>
           <%= link_to 'Edit', edit_book_path(book) %>
           <%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %>
         <% end %>
