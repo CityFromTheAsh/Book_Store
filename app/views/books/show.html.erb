@@ -2,7 +2,7 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Title:</strong>
+  <strong><%= t(:title, scope: :books) %>:</strong>
   <%= @book.title.upcase %>
 </p>
 <% @book.images.each do |p| %>
@@ -10,42 +10,42 @@
 <% end %>
 
 <p>
-  <strong>Author:</strong>
+  <strong><%= t(:author, scope: :books) %>:</strong>
   <%= to_high @book.author %>
 </p>
 
 <p>
-  <strong>Price:</strong>
+  <strong><%= t(:price, scope: :books) %>:</strong>
   <%= @book.price %>
 </p>
 
 <p>
-  <strong>Page count:</strong>
+  <strong><%= t(:page_count, scope: :books) %>:</strong>
   <%= @book.page_count %>
 </p>
 
 <p>
-  <strong>About:</strong>
+  <strong><%= t(:about, scope: :books) %>:</strong>
   <%= @book.about %>
 </p>
 
 <p>
-  <strong>Owner:</strong>
+  <strong><%= t(:user, scope: :books) %>:</strong>
   <%= @book.user.login %>
 </p>
 
 <p>
-  <strong>Created_at:</strong>
+  <strong><%= t(:created_at, scope: :books) %>:</strong>
   <%= @book.created_at %>
 </p>
 
 <p>
-  <strong>Binding:</strong>
+  <strong><%= t(:binding, scope: :books) %>:</strong>
   <%= @book.binding %>
 </p>
 
 <p>
-  <strong>Genre:</strong>
+  <strong><%= t(:genre, scope: :books) %>:</strong>
   <%= @book.genre %>
 </p>
 
