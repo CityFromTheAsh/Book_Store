@@ -1,6 +1,9 @@
 en:
   books:
     header: Books
+    image: Images
+    header_n: New Book
+    page_count: Page Count
     title: Title
     author: Author
     price: Price

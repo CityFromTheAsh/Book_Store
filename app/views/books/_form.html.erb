@@ -12,45 +12,45 @@
       <% end %>
 
       <div class="field">
-        <%= f.label :title %>
+        <%= f.label t(:title, scope: :books) %>
         <%= f.text_field :title, class: "form-control" %>
       </div>
 
       <div class="field">
-        <%= f.label :author %>
+        <%= f.label t(:author, scope: :books) %>
         <%= f.text_field :author, class: "form-control"  %>
       </div>
 
       <div class="field">
-        <%= f.label :price %>
+        <%= f.label t(:price, scope: :books)%>
         <%= f.text_field :price, class: "form-control"  %>
       </div>
 
       <div class="field">
-        <%= f.label :page_count %>
+        <%= f.label t(:page_count, scope: :books) %>
         <%= f.text_field :page_count, class: "form-control"  %>
       </div>
 
 
       <div class="field">
-        <%= f.label :binding %>
+        <%= f.label t(:binding, scope: :books) %>
         <%= f.select :binding, binding:[:hardcover, :softcover] %>
       </div>
 
       <div class="field">
-        <%= f.label :genre %>
+        <%= f.label t(:genre, scope: :books) %>
         <%= f.text_field :genre, class: "form-control"  %>
       </div>
 
       <div class="field">
-        <%= f.label :about %>
+        <%= f.label t(:about, scope: :books) %>
         <%= f.text_area :about, class: "form-control"  %>
       </div>
 
       <div class="field">
       <%= f.fields_for :images, Image.new do |p| %>
           <div class="field">
-            <%= p.label :image %><br>
+            <%= p.label t(:image, scope: :books) %><br>
             <%= p.file_field :image, multiple: true, name: "images[image][]" %>
           </div>
       <% end %>
