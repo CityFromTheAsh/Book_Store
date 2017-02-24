@@ -1,7 +1,7 @@
 <%= render 'layouts/top_panel' %>
 <p id="notice"><%= notice %></p>
 <nav>
-  <h1><%=t(:header, scope: :books)%></h1>
+  <h1><%=t(:header, scope: :books)%>:</h1>
   <div class="col-xs-2">
     <%= form_tag books_path, method: 'get' do %>
         <%= label_tag t(:f_word, scope: :books)%>
