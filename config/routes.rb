@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     end
   end
   resources :books do
+    get :order
     resources :orders
   end
   resources :orders
