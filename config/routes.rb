@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   resources :messages
   resources :users do
+    get :money
     resources :books
     resource :messages
     collection do
