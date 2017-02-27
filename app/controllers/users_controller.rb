@@ -1,5 +1,10 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!, only: [:money]
   before_action :set_user, only: [:show, :edit, :ban]
+
+  def money
+
+  end
 
   def index
     @users = User.all.page(params[:page])

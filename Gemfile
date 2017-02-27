@@ -18,6 +18,7 @@ gem 'coffee-rails', '~> 4.2'
 
 
 gem 'rmega'
+gem 'google-analytics-rails'
 gem 'yt', '~> 0.28.0'
 gem 'fog'
 gem 'bootstrap-sass', '~> 3.3.6'
