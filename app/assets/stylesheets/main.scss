@@ -52,7 +52,7 @@ li:focus {
 }
 .selectable:hover {
   cursor: pointer;
-  background-color: orange; /* Цвет ссылки при наведении на нее курсора мыши */
+  background-color: peachpuff; /* Цвет ссылки при наведении на нее курсора мыши */
   text-decoration: underline; /* Добавляем подчеркивание */
 }
 .book_table {
@@ -74,7 +74,7 @@ li:focus {
 }
 .table-head {
   a {
-    color: #B00100;
+    color: greenyellow;
   }
   size: 17pt;
 }
