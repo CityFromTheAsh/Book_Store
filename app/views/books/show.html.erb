@@ -55,7 +55,7 @@
 </p>
 
 <% if current_user.present? %>
-    <%= link_to 'buy it', new_book_order_path(@book)%> |
+    <%= link_to 'buy it', book_order_path(@book), method: :get, data: { confirm: 'Вы точно хотите купить эту книгу?' } %> |
     <%if current_user.admin %>
         <%= link_to 'Edit', edit_book_path(@book) %>
     <% end %>|
