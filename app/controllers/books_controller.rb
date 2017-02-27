@@ -29,7 +29,7 @@ class BooksController < ApplicationController
       @books = @books.where(author: params[:book_id]) if params[:book_id].present?
       @books = @books.order(params[:sort])
     end
-    @books = @books.where(status: (params[:status] || :for_sale))
+    @books = params[:status].present? ? @books.where(status: params[:status]) : @books.where(status: (:for_sale))
     @books = @books.page(params[:page])
   end
 
@@ -105,6 +105,7 @@ class BooksController < ApplicationController
     @book = Book.find(params[:book_id])
     @book.update(status: :payment)
     Order.create(buyer: current_user, book: @book, user: @book.user)
+    @book.user.update(balance: (@book.user.balance - (@book.price / 50)))
     redirect_to books_path
   end
 

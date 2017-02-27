@@ -1,7 +1,8 @@
 en:
   top_panel:
      user: User
-     my_books: My books
+     my_books: My books for sell
+     payment: My books waiting for payment
      home: Home Page
      about: About
      contact: Contact
