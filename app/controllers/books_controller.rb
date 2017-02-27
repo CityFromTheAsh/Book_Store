@@ -5,12 +5,18 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index
-    @books = Book.all
+    if params[:user_id].present?
+      @path = user_books_path
+      @books = Book.where(user_id: params[:user_id])
+    else
+      @path = books_path
+      @books = Book.all
+    end
+
     if params[:login].present?
       login = params[:login].downcase
       user = User.where(login: login)
       @books =  @books.where(user: user) if user.present?
-      puts @books.to_json
     end
     if params[:search].present?
       search_strings = params[:search].gsub(/[^\w\sА-Яа-я ]/, '').downcase
@@ -98,6 +104,7 @@ class BooksController < ApplicationController
   def order
     @book = Book.find(params[:book_id])
     @book.update(status: :payment)
+    Order.create(buyer: current_user, book: @book, user: @book.user)
     redirect_to books_path
   end
 
