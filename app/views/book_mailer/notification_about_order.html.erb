@@ -4,9 +4,9 @@
   <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
 </head>
 <body>
-<h1>Привет <%= @user.login %></h1>
+<h1>Здравстуйте <%= @user.login %></h1>
 <p>
-  Вешайся! Твою книгу заказали.
+  Вашу книгу <%= link_to 'Показать', @book  %> заказали
 </p>
 </body>
 </html>

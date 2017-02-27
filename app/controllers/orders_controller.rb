@@ -17,7 +17,7 @@ class OrdersController < ApplicationController
   # GET /orders/new
   def new
     @book = Book.find(params[:book_id])
-    BookMailer.notification_about_order(@book.user).deliver
+    BookMailer.notification_about_order(@book, @book.user).deliver
     if @book.order.nil?
       @book.order = Order.new(book: @book, buyer: current_user.login,  admin: "new admin")
     else
