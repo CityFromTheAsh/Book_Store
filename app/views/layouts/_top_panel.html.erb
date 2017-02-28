@@ -28,12 +28,15 @@
                     <li><%= link_to t(:log_out, scope: :top_panel), destroy_user_session_path, method: :delete %></li>
                 <% end %>
                 <% if current_user.present? %>
-                  <li class="divider"></li>
-                  <li class="dropdown-header"><%=link_to t(:balance, scope: :top_panel) + ':' + current_user.balance.to_s, user_money_path(current_user) %> </li>
-                  <li><%= link_to t(:messages, scope: :top_panel), messages_path, method: :get %></li>
-                  <li><%= link_to t(:my_books, scope: :top_panel), user_books_path(current_user), method: :get %></li>
-                  <li><%= link_to t(:payment, scope: :top_panel), user_books_path(current_user, status: :payment), method: :get %></li>
-                  <li><a href="#"><%=t(:options, scope: :top_panel)%></a></li><!--TODO: update -->
+                    <li class="divider"></li>
+                    <li class="dropdown-header"><%=link_to t(:balance, scope: :top_panel) + ':' + current_user.balance.to_s, user_money_path(current_user) %> </li>
+                    <li><%= link_to t(:messages, scope: :top_panel), messages_path, method: :get %></li>
+                    <li><%= link_to t(:my_books, scope: :top_panel), user_books_path(current_user), method: :get %></li>
+                    <li><%= link_to t(:payment, scope: :top_panel), user_books_path(current_user, status: :payment), method: :get %></li>
+                    <li><%= link_to t(:confirm_payment, scope: :top_panel), user_books_path(current_user, status: :payment), method: :get %></li>
+                    <li><%= link_to t(:confirm_delivery, scope: :top_panel), user_books_path(current_user, status: :payment), method: :get %></li>
+                    <li><%= link_to t(:give_feedback, scope: :top_panel), user_books_path(current_user, status: :payment), method: :get %></li>
+                    <li><a href="#"><%=t(:options, scope: :top_panel)%></a></li><!--TODO: update -->
                 <% end %>
               </ul>
             </li>

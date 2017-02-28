@@ -11,4 +11,7 @@ module UserHelper
     user.ban = !user.ban
     user.save
   end
+  def sql_find_with_status
+
+  end
 end

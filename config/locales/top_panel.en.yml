@@ -1,5 +1,8 @@
 en:
   top_panel:
+     confirm_payment: Confirm Payment
+     confirm_delivery: Confirm Delivery
+     give_feedback: Give Feedback
      user: User
      my_books: My books for sell
      payment: My books waiting for payment
