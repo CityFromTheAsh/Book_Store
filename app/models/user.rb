@@ -5,7 +5,7 @@ class User < ApplicationRecord
   has_many :books
   has_many :orders
   has_many :messages
-  # has_one :option
+  has_one :option
 
   mount_uploader :avatar, AvatarUploader
 
