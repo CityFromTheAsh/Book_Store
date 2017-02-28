@@ -36,7 +36,7 @@
                     <li><%= link_to t(:confirm_payment, scope: :top_panel), user_books_path(current_user, status: :confirm_payment), method: :get %></li>
                     <li><%= link_to t(:confirm_delivery, scope: :top_panel), user_books_path(current_user, status: :delivery), method: :get %></li>
                     <li><%= link_to t(:give_feedback, scope: :top_panel), user_books_path(current_user, status: :give_feedback), method: :get %></li>
-                    <li><a href="#"><%=t(:options, scope: :top_panel)%></a></li><!--TODO: update -->
+                    <li><%= link_to t(:options, scope: :top_panel), options_show_path, method: :get %></li>
                 <% end %>
               </ul>
             </li>

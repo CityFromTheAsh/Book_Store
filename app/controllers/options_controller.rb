@@ -1,12 +1,14 @@
 class OptionsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: [:show]
 
   def show
-    current_user.update(option: Option.create(user_id: current_user.id)) if current_user.option.nil?
     @option = current_user.option
   end
 
   def edit
+
+  end
+  def update
     respond_to do |format|
       if @option.update(option_params)
         format.html { }
@@ -18,7 +20,7 @@ class OptionsController < ApplicationController
     end
   end
 
-  def book_params
-    params.require(:option).permit(:book_per_page)
+  def option_params
+    params.require(:option).permit(:book_per_page, :language)
   end
 end

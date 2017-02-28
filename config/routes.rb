@@ -1,7 +1,17 @@
 Rails.application.routes.draw do
+  get 'options/show'
+
+  get 'options/edit'
+
+  get 'option/show'
+
+  get 'option/edut'
+
   root 'pasteboard#home'
   get 'pasteboard/about'
   get 'pasteboard/contact'
+  resource :options do
+  end
 
   devise_for :users,  controllers: {
       registrations: 'user_devise_controller/registrations'

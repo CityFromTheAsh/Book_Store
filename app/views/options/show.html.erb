@@ -1,0 +1,12 @@
+<%= render 'layouts/top_panel' %>
+<h1>Options</h1>
+<div class="row">
+  <strong class="col-xs-1"><%=t(:language, scope: :options)%>: </strong>
+  <p class="col-xs-2"><%= @option.language %></p>
+</div>
+<hr>
+<div class="row">
+  <strong class="col-xs-1"><%=t(:book_per_page, scope: :options)%>: </strong>
+  <p class="col-xs-2"><%= @option.book_per_page %></p>
+</div>
+<%= link_to t(:edit, scope: :options), options_edit_path(option: @option) %>
