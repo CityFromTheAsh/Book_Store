@@ -8,11 +8,15 @@ class UserDeviseController::RegistrationsController < Devise::RegistrationsContr
   # end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    super
+    Option.create(user: resource, language: :ru, book_per_page: 25)
+    puts '********************'
+    puts resource
+    puts resource.option
+  end
 
-  #GET /resource/edit
+  # GET /resource/edit
   # def edit
   #   super
   # end

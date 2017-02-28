@@ -1,3 +1,3 @@
-class Option
-  belongs_to :users
+class Option < ApplicationRecord
+  belongs_to :user
 end
