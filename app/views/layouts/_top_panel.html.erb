@@ -33,9 +33,9 @@
                     <li><%= link_to t(:messages, scope: :top_panel), messages_path, method: :get %></li>
                     <li><%= link_to t(:my_books, scope: :top_panel), user_books_path(current_user), method: :get %></li>
                     <li><%= link_to t(:payment, scope: :top_panel), user_books_path(current_user, status: :payment), method: :get %></li>
-                    <li><%= link_to t(:confirm_payment, scope: :top_panel), user_books_path(current_user, status: :payment), method: :get %></li>
-                    <li><%= link_to t(:confirm_delivery, scope: :top_panel), user_books_path(current_user, status: :payment), method: :get %></li>
-                    <li><%= link_to t(:give_feedback, scope: :top_panel), user_books_path(current_user, status: :payment), method: :get %></li>
+                    <li><%= link_to t(:confirm_payment, scope: :top_panel), user_books_path(current_user, status: :confirm_payment), method: :get %></li>
+                    <li><%= link_to t(:confirm_delivery, scope: :top_panel), user_books_path(current_user, status: :delivery), method: :get %></li>
+                    <li><%= link_to t(:give_feedback, scope: :top_panel), user_books_path(current_user, status: :give_feedback), method: :get %></li>
                     <li><a href="#"><%=t(:options, scope: :top_panel)%></a></li><!--TODO: update -->
                 <% end %>
               </ul>
