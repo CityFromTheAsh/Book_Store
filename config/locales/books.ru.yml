@@ -1,0 +1,17 @@
+ru:
+  books:
+    header: Книги
+    image: Изображения
+    page_count: Количество Страниц
+    header_n: Новая Книга
+    title: Заглавие
+    author: Автор
+    price: Цена
+    user: Продавец
+    created_at: Добавлена
+    binding: Переплёт
+    genre: Жанр
+    about: Описание
+    f_word: Найти по Слову
+    f_login: Найти по Имени пользывателя
+    submit: Выполнить

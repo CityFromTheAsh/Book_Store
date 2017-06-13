@@ -1,0 +1,90 @@
+<%= render 'layouts/top_panel' %>
+<div class="l_margin">
+<h1>Home Page</h1>
+<!-- Carousel
+================================================== -->
+<div id="myCarousel" class="carousel slide" data-ride="false">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+    <li data-target="#myCarousel" data-slide-to="1"></li>
+    <li data-target="#myCarousel" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner">
+    <div class="item active">
+      <!--<%#= TODO @video.rating %>-->
+      <iframe class="center-block" width="854" height="480" src="https://www.youtube.com/embed/wqz6xBd-xKk" frameborder="0" allowfullscreen></iframe>
+      <div class="container">
+        <div class="carousel-caption">
+          <h1>You can find books here.</h1>
+          <!--<h1 data-replace-tmp-key="1d3e47a74e344ff8e33fe8b91bdfbd78"><os-p key="1d3e47a74e344ff8e33fe8b91bdfbd78">You can find books here.</os-p></h1>-->
+          <p data-replace-tmp-key="fe61dd0778f411f7ba020e18acadd094"><os-p key="fe61dd0778f411f7ba020e18acadd094">Find any book in our store</os-p></p>
+          <%= link_to "Books", controller: 'books', action: 'index'%>
+        </div>
+      </div>
+    </div>
+    <div class="item">
+      <iframe class="center-block" width="854" height="480" src="https://www.youtube.com/embed/DWaB4PXCwFU?list=PL89v5UCz1sHi0JsQxQ8DBatNvs6pDV_FK" frameborder="0" allowfullscreen></iframe>
+      <div class="container">
+        <div class="carousel-caption">
+          <h1 data-replace-tmp-key="02bf95124b8023f3f872304610a9fb69"><os-p key="02bf95124b8023f3f872304610a9fb69">You can sell you books here</os-p></h1>
+          <p data-replace-tmp-key="86f4668a3d673f1d84245d04498170d3"><os-p key="86f4668a3d673f1d84245d04498170d3">On our websity many buyers!</os-p></p>
+          <%= link_to "Books", controller: 'books', action: 'index'%>        </div>
+      </div>
+    </div>
+    <div class="item">
+      <%= image_tag "img_5180.jpg"%>
+      <div class="container">
+        <div class="carousel-caption">
+          <h1 data-replace-tmp-key="7e147a0a0e3a1d8b678ac9ba7b05f817"><os-p key="7e147a0a0e3a1d8b678ac9ba7b05f817">You can bay many books</os-p></h1>
+          <p data-replace-tmp-key="86f4668a3d673f1d84245d04498170d3"><os-p key="86f4668a3d673f1d84245d04498170d3">On our website meny sellers.</os-p></p>
+          <%= link_to "Books", controller: 'books', action: 'index'%>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+</div><!-- /.carousel -->
+<!-- START THE FEATURETTES -->
+
+<hr class="featurette-divider">
+
+<div class="row featurette">
+  <div class="col-md-7">
+    <h2 class="featurette-heading" data-replace-tmp-key="1b9af7e7a8f81c941f1acaca61217af0"><os-p key="1b9af7e7a8f81c941f1acaca61217af0">First featurette heading. <span class="text-muted">It'll blow your mind.</span></os-p></h2>
+    <p class="lead" data-replace-tmp-key="31023dbb3702ad59937265bb124dac23"><os-p key="31023dbb3702ad59937265bb124dac23">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</os-p></p>
+  </div>
+  <div class="col-md-5">
+    <img class="featurette-image img-responsive" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+  </div>
+</div>
+
+<hr class="featurette-divider">
+
+<div class="row featurette">
+  <div class="col-md-5">
+    <img class="featurette-image img-responsive" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+  </div>
+  <div class="col-md-7">
+    <h2 class="featurette-heading" data-replace-tmp-key="41f3953a896bc5dcd88a716d0b0541c7"><os-p key="41f3953a896bc5dcd88a716d0b0541c7">Oh yeah, it's that good. <span class="text-muted">See for yourself.</span></os-p></h2>
+    <p class="lead" data-replace-tmp-key="31023dbb3702ad59937265bb124dac23"><os-p key="31023dbb3702ad59937265bb124dac23">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</os-p></p>
+  </div>
+</div>
+
+<hr class="featurette-divider">
+
+<div class="row featurette">
+  <div class="col-md-7">
+    <h2 class="featurette-heading" data-replace-tmp-key="d1e46c9c773fe5d0c7de2173d2288938"><os-p key="d1e46c9c773fe5d0c7de2173d2288938">And lastly, this one. <span class="text-muted">Checkmate.</span></os-p></h2>
+    <p class="lead" data-replace-tmp-key="31023dbb3702ad59937265bb124dac23"><os-p key="31023dbb3702ad59937265bb124dac23">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</os-p></p>
+  </div>
+  <div class="col-md-5">
+    <img class="featurette-image img-responsive" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+  </div>
+</div>
+
+<hr class="featurette-divider">
+
+<!-- /END THE FEATURETTES -->
+</div>

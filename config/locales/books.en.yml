@@ -1,0 +1,17 @@
+en:
+  books:
+    header: Books
+    image: Images
+    header_n: New Book
+    page_count: Page Count
+    title: Title
+    author: Author
+    price: Price
+    user: User
+    created_at: Created at
+    binding: Binding
+    genre: Genre
+    about: About
+    f_word: Find Word
+    f_login: Find Login
+    submit: Submit

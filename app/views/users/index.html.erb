@@ -1,0 +1,41 @@
+<%= render 'layouts/top_panel' %></<br>
+<h1>Sellers</h1>
+<p id="notice"><%= notice %></p>
+
+<nav>
+
+
+
+  <table class="table table-condensed table-bordered">
+    <thead>
+    <tr class="success">
+      <th>Login</th>
+      <th>books sold</th>
+      <th>books bought</th>
+      <th>reputation</th>
+      <% if admin? current_user %>
+          <th>have ban?</th>
+      <% end %>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @users.each do |user| %>
+        <tr>
+          <td class="col-md-1 active"><%=link_to user.login, user_path(user) %></td>
+          <td class="col-md-1"><%= user.books_sold %></td>
+          <td class="col-md-1"><%= user.books_bought%></td>
+          <td class="col-md-1"><%= user.reputation %></td>
+          <% if admin? current_user %>
+              <td class="col-md-1"><%= user.ban %> </td>
+              <td> <%= link_to 'ban', ban_user_path(user), remote: true, :method => :put, class: 'ban-user' %></td>
+          <% end %>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+
+  <br>
+</nav>
+<%= paginate @users %>
+

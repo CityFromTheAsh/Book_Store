@@ -1,0 +1,51 @@
+<div class="navbar-wrapper bind top">
+  <div class="container">
+    <div class="navbar navbar-inverse navbar-static-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="navbar-header"><%= link_to 'Books nutting', books_path, class:'size_17'%></li>
+            <li><%= link_to t(:home, scope: :top_panel), controller: 'pasteboard', action: 'home'  %></li>
+            <li><%= link_to t(:about, scope: :top_panel), controller: 'pasteboard', action: 'about'  %></li>
+            <li><%= link_to t(:contact, scope: :top_panel), controller: 'pasteboard', action: 'contact'  %></li>
+            <li><%= link_to t(:find, scope: :top_panel), users_path %></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" ><os-p><%=t(:user, scope: :top_panel)%><span class="caret"></span></os-p></a>
+              <ul class="dropdown-menu" role="menu">
+              <% if current_user.nil? %>
+                  <li><%= link_to t(:log_in, scope: :top_panel), new_user_session_path  %></li>
+                  <li><%= link_to t(:registration, scope: :top_panel), new_user_registration_path  %></li>
+                <% else %>
+                    <%= link_to current_user.login, user_path(current_user) %>
+                    <li><%= link_to t(:log_out, scope: :top_panel), destroy_user_session_path, method: :delete %></li>
+                <% end %>
+                <% if current_user.present? %>
+                    <li class="divider"></li>
+                    <li class="dropdown-header"><%=link_to t(:balance, scope: :top_panel) + ':' + current_user.balance.to_s, user_money_path(current_user) %> </li>
+                    <li><%= link_to t(:messages, scope: :top_panel), messages_path, method: :get %></li>
+                    <li><%= link_to t(:my_books, scope: :top_panel), user_books_path(current_user), method: :get %></li>
+                    <li><%= link_to t(:payment, scope: :top_panel), user_books_path(current_user, status: :payment), method: :get %></li>
+                    <li><%= link_to t(:confirm_payment, scope: :top_panel), user_books_path(current_user, status: :confirm_payment), method: :get %></li>
+                    <li><%= link_to t(:confirm_delivery, scope: :top_panel), user_books_path(current_user, status: :delivery), method: :get %></li>
+                    <li><%= link_to t(:give_feedback, scope: :top_panel), user_books_path(current_user, status: :give_feedback), method: :get %></li>
+                    <li><%= link_to t(:options, scope: :top_panel), options_show_path, method: :get %></li>
+                <% end %>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="margin-top">
+  <%= yield %>
+</div>

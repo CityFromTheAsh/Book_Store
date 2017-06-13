@@ -1,0 +1,90 @@
+body {
+  margin-right: 5%;
+  margin-left: 5%;
+  margin-bottom: 10%;
+  background-color: honeydew;
+}
+.color_form {
+  background-color: lightsteelblue;
+}
+.bind {
+  position: fixed;
+  font-weight:bold;
+  z-index: 1;
+}
+.top {
+  top: 0%;
+}
+.margin-top {
+  margin-top: 10%;
+}
+li:hover {
+  background-color: forestgreen;
+}
+li:focus {
+  background-color: black;
+}
+.half_to_left {
+  left: 50%;
+}
+.l_margin {
+  margin-left: 1%;
+}
+.message-field {
+  background-color: white;
+}
+.message-author {
+  color: red;
+}
+.message-time {
+  color: darkorange;
+}
+.message-text {
+  color: darkblue;
+}
+.product_info {
+  display: none;
+  background: white; color: darkblue;
+}
+.selectable {
+  background-color: rgb(245,245,245);
+  border: #999999;
+}
+.selectable:hover {
+  cursor: pointer;
+  background-color: peachpuff; /* Цвет ссылки при наведении на нее курсора мыши */
+  text-decoration: underline; /* Добавляем подчеркивание */
+}
+.book_table {
+  display:table;
+  width:100%;
+}
+.wrapper {
+  width:80%;
+  margin-left: 2%;
+}
+.book_col {
+  display:table-cell;
+  border:1px solid;
+  border-color: darkgrey;
+  height: 100px;
+}
+.table-head {
+  background-color: rgb(101,101,101);
+}
+.table-head {
+  a {
+    color: greenyellow;
+  }
+  size: 17pt;
+}
+.auto_field_size {
+  width: 100%;
+}
+.img-bord {
+  border-color: darkblue;
+  border: 10px;
+}
+.size_17{
+  font-size: 27px;
+}

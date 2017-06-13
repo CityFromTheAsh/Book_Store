@@ -1,0 +1,28 @@
+<%= render 'layouts/top_panel' %></<br>
+<h1>Messages:</h1>
+<table class="table table-condensed table-bordered">
+  <thead>
+  <tr class="success">
+    <th>Sender</th>
+    <th>Recipient</th>
+    <th>Created at</th>
+    <th>Updated at</th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @message.each do |message| %>
+  <tr>
+    <td class="col-md-1 active"> <%= message.sender.login if message.sender.present? %> </td>
+    <td class="col-md-1 active"> <%= message.recipient.login if message.recipient.present? %> </td>
+    <td class="col-md-1 info"> <%= message.created_at %> </td>
+    <td class="col-md-1 info"> <%= message.updated_at %> </td>
+    <td class="col-md-1 info"> <%= link_to 'show', message_path(message) %> </td>
+  </tr>
+  <% end %>
+
+  </tbody>
+</table>
+<%= paginate @message %>
+
+<%=link_to 'New Message', new_message_path %>

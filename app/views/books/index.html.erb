@@ -1,0 +1,91 @@
+<%= render 'layouts/top_panel' %>
+<p id="notice"><%= notice %></p>
+<nav>
+  <h1><%=t(:header, scope: :books)%>:</h1>
+  <div class="col-xs-2">
+    <%= form_tag @path, method: 'get' do %>
+        <%= label_tag t(:f_word, scope: :books)%>
+        <%= text_field_tag :search, params[:search], class:'auto_field_size' %>
+        <%= label_tag t(:f_login, scope: :books)%>
+        <%= text_field_tag :login, params[:login], class:'auto_field_size' %>
+        <%= submit_tag t(:submit, scope: :books), name: nil %>
+    <% end %>
+  </div>
+  <div class="wrapper">
+<div class="book_table">
+  <div>
+    <div class="row table-head">
+      <div class="col-xs-5">
+        <%=link_to t(:title, scope: :books), books_path(sort:'title'), class: 'auto_field_size' %>
+      </div>
+      <div class="col-xs-2">
+        <%=link_to t(:author, scope: :books), books_path(sort:'author'), class: 'auto_field_size' %>
+      </div>
+      <div class="col-xs-1">
+        <%=link_to t(:price, scope: :books), books_path(sort:'price'), class: 'auto_field_size' %>
+      </div>
+      <div class="col-xs-1">
+        <%=link_to t(:user, scope: :books), books_path(sort:'user_id'), class: 'auto_field_size' %>
+      </div>
+    </div>
+  </div>
+  <div class="accordion-menu">
+    <% @books.each do |book| %>
+    <div class="row selectable accordion">
+      <div class="col-xs-5 book_col"><div class='auto_field_size'><%= book.title.upcase  %></div></div>
+      <div class="col-xs-2 book_col"><%= to_high book.author %></div>
+      <div class="col-xs-1 book_col"><%= book.price %></div>
+      <div class="col-xs-1 book_col"><%= book.user.login %></div>
+      <div><%= image_tag book.images.first.image.url, size: '150x100', class:'col-xs-2' if book.images.first.present? %></div>
+    </div>
+
+    <div class="product_info row">
+      <div class="col-xs-6">
+        <%= link_to 'Show', book %>
+        <% if permission? book, current_user  %>
+          <%= link_to 'Edit', edit_book_path(book) %>
+          <%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <% end %>
+        <p> <%= t(:created_at, scope: :books) %>:  <%= book.created_at %></p>
+        <p> <%= t(:binding, scope: :books) %>: <%= book.binding %></p>
+        <p> <%= t(:genre, scope: :books) %> : <%= book.genre %></p>
+        <p> <%= t(:page_count, scope: :books) %> : <%= book.page_count %></p>
+        <p> <%= t(:about, scope: :books) %> : <%= book.about %></p>
+      </div>
+      <!-- Carousel
+================================================== -->
+      <div id="myCarousel<%=book.id.to_s%>" class="carousel slide col-xs-6 img-bord" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+          <% book.images.length.times do |i| %>
+          <li data-target="#myCarousel<%=book.id.to_s%>" data-slide-to="<%= i.to_s %>"></li>
+          <%end%>
+
+        </ol>
+        <div>
+        <div class="carousel-inner">
+          <% book.images.each do |p| %>
+              <% if p==book.images.first %>
+                <div class="item active">
+                  <%= image_tag p.image.url, size: '300x200', class: 'center-block' %>
+                </div>
+              <%else%>
+                <div class="item">
+                  <%= image_tag p.image.url, size: '300x200', class: 'center-block' %>
+                </div>
+              <% end %>
+          <% end %>
+        </div>
+        <a class="left carousel-control" href="#myCarousel<%=book.id.to_s%>" role="button" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+        <a class="right carousel-control" href="#myCarousel<%=book.id.to_s%>" role="button" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+      </div><!-- /.carousel -->
+    </div>
+  </div>
+  <% end %>
+  </div>
+  </div>
+    <br>
+<%= paginate @books %>
+
+
+<%= link_to 'New Book', new_book_path %>

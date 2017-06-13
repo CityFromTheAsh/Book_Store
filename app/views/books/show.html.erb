@@ -1,0 +1,104 @@
+<%= render 'layouts/top_panel' %>
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong><%= t(:title, scope: :books) %>:</strong>
+  <%= @book.title.upcase %>
+</p>
+<% @book.images.each do |p| %>
+    <%= image_tag p.image.url, size: '150x100' %>
+<% end %>
+
+<p>
+  <strong><%= t(:author, scope: :books) %>:</strong>
+  <%= to_high @book.author %>
+</p>
+
+<p>
+  <strong><%= t(:price, scope: :books) %>:</strong>
+  <%= @book.price %>
+</p>
+
+<p>
+  <strong><%= t(:page_count, scope: :books) %>:</strong>
+  <%= @book.page_count %>
+</p>
+
+<p>
+  <strong><%= t(:about, scope: :books) %>:</strong>
+  <%= @book.about %>
+</p>
+
+<p>
+  <strong><%= t(:user, scope: :books) %>:</strong>
+  <%= @book.user.login %>
+</p>
+
+<p>
+  <strong><%= t(:created_at, scope: :books) %>:</strong>
+  <%= @book.created_at %>
+</p>
+
+<p>
+  <strong><%= t(:binding, scope: :books) %>:</strong>
+  <%= @book.binding %>
+</p>
+
+<p>
+  <strong><%= t(:genre, scope: :books) %>:</strong>
+  <%= @book.genre %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= Book.status.find_value(@book.status).text %>
+</p>
+
+<% if current_user.present? %>
+    <%= link_to 'buy it', book_order_path(@book), method: :get, data: { confirm: 'Вы точно хотите купить эту книгу?' } %> |
+    <%if current_user.admin %>
+        <%= link_to 'Edit', edit_book_path(@book) %>
+    <% end %>|
+<% end %>
+<%= link_to 'Back', books_path %>
+
+<% @book.messages.each do |message| %>
+    <div class="message-field success">
+      <div class="col-md-6">
+        <%= image_tag message.book.user.avatar, size: '50x50' %>
+        </div>
+      <div class="col-md-1">
+        <div class="message-author">
+          <strong>Author: </strong>
+          <%= message.book.user.login %>
+          </br>
+        </div>
+        <div class="message-time">
+          <strong>created_at: </strong>
+          <%= message.created_at %>
+          </br>
+        </div>
+        </br>
+        <div class="message-text">
+          <strong>Message: </strong>
+          <%= message.message %>
+        </div>
+      </div>
+    </div>
+    </br>
+    </br>
+<% end %>
+
+<% if current_user.present? %>
+</br></br></br>
+<strong>Add comment</strong>
+</br>
+    <%= form_for @message do |f|%>
+        <%= f.hidden_field(:book_id, value: @book.id)   %>
+        <%= f.text_area :message %>
+        <%= f.hidden_field(:sender_id, value: current_user.id) %>
+        <div class="actions">
+          <%= f.submit  %>
+        </div>
+    <% end%>
+<% end %>
