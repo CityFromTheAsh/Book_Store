@@ -66,7 +66,7 @@
     <div class="message-field success">
       <div class="col-md-6">
         <%= image_tag message.book.user.avatar, size: '50x50' %>
-        </div>
+      </div>
       <div class="col-md-1">
         <div class="message-author">
           <strong>Author: </strong>
@@ -90,10 +90,10 @@
 <% end %>
 
 <% if current_user.present? %>
-</br></br></br>
-<strong>Add comment</strong>
-</br>
-    <%= form_for @message do |f|%>
+    </br></br></br>
+    <strong>Add comment</strong>
+    </br>
+    <%= form_for @message, controller: :messages_controller do |f|%>
         <%= f.hidden_field(:book_id, value: @book.id)   %>
         <%= f.text_area :message %>
         <%= f.hidden_field(:sender_id, value: current_user.id) %>
