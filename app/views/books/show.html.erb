@@ -64,10 +64,10 @@
 
 <% @book.messages.each do |message| %>
     <div class="message-field success">
-      <div class="col-md-6">
+      <div class="col-md-1">
         <%= image_tag message.book.user.avatar, size: '50x50' %>
       </div>
-      <div class="col-md-1">
+      <div class="col-md-6">
         <div class="message-author">
           <strong>Author: </strong>
           <%= message.book.user.login %>
@@ -93,7 +93,7 @@
     </br></br></br>
     <strong>Add comment</strong>
     </br>
-    <%= form_for @message, controller: :messages_controller do |f|%>
+    <%= form_for @message do |f|%>
         <%= f.hidden_field(:book_id, value: @book.id)   %>
         <%= f.text_area :message %>
         <%= f.hidden_field(:sender_id, value: current_user.id) %>
